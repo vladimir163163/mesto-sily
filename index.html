@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Место Силы">
     <meta name="theme-color" content="#FAF7F2">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23FAF7F2'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%23B86B35' stroke-width='5'/%3E%3Ccircle cx='90' cy='90' r='16' fill='%23B86B35'/%3E%3Cpath d='M90 22v16M90 142v16M22 90h16M142 90h16M42 42l11 11M127 127l11 11M138 42l-11 11M53 127l-11 11' stroke='%23B86B35' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
     <title>Место Силы — Дневник побед, Декларация и Целевой Слайд</title>
 
     <!-- Tailwind CSS -->
@@ -239,7 +240,10 @@
     <header class="px-5 safe-top pb-3 bg-ivory/95 backdrop-blur-md border-b border-hairline/70 flex items-center justify-between shrink-0 z-20">
         <div>
             <p id="header-date" class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Понедельник, 23 ноября</p>
-            <h1 class="font-serif text-xl font-bold text-espresso tracking-tight">Место Силы</h1>
+            <div class="flex items-baseline gap-2">
+                <h1 class="font-serif text-xl font-bold text-espresso tracking-tight">Место Силы</h1>
+                <span class="text-[11px] text-taupe hidden sm:inline">Единство души и разума</span>
+            </div>
         </div>
 
         <!-- Кнопка Анти-маятник / Сменить слайд -->
@@ -321,6 +325,19 @@
                         </div>
                     </div>
 
+                    <!-- Выбор фонового звука (Web Audio API) -->
+                    <div class="grid grid-cols-3 gap-1.5" id="sound-mode-pills">
+                        <button type="button" onclick="setSoundMode('ambient')" id="snd-ambient" class="py-1.5 px-2 rounded-xl border border-terracotta bg-terracotta/10 text-terracotta text-[11px] font-semibold truncate btn-tactile">
+                            🌿 Эмбиент 432 Гц
+                        </button>
+                        <button type="button" onclick="setSoundMode('ocean')" id="snd-ocean" class="py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile">
+                            🌊 Шум океана
+                        </button>
+                        <button type="button" onclick="setSoundMode('mute')" id="snd-mute" class="py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile">
+                            🔇 Без звука
+                        </button>
+                    </div>
+
                     <!-- Прогресс-бар таймера -->
                     <div class="w-full h-2 bg-warmSand rounded-full overflow-hidden">
                         <div id="timer-progress-bar" class="h-full bg-terracotta transition-all duration-300 rounded-full" style="width: 100%"></div>
@@ -335,6 +352,7 @@
                             Сброс
                         </button>
                     </div>
+                    <p class="text-[10px] text-taupe text-center">Для звука на iPhone выключи бесшумный режим боковой кнопкой</p>
                 </div>
 
                 <!-- Кнопка завершения утреннего ритуала -->
@@ -618,166 +636,166 @@
                     </p>
                 </div>
             </div>
-
-            <div class="paper-card rounded-2xl p-4 space-y-3">
-                <h3 class="font-serif text-base font-bold text-espresso">Резервная копия (iCloud / Файлы)</h3>
-                <p class="text-xs text-taupe leading-relaxed">
-                    Сохраняй файл резервной копии в приложение «Файлы» на iPhone, чтобы твоя история побед всегда была под защитой твоего Apple ID.
-                </p>
-
-                <button onclick="exportJsonBackup()" class="w-full py-3.5 px-4 rounded-xl bg-espresso text-ivory font-semibold text-sm flex items-center justify-center gap-2 btn-tactile">
-                    <span>⬇ Скачать резервную копию (.json)</span>
-                </button>
-
-                <label class="w-full py-3.5 px-4 rounded-xl bg-warmSand border border-hairline text-espresso font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer btn-tactile">
-                    <span>⬆ Восстановить из файла</span>
-                    <input type="file" accept=".json" onchange="importJsonBackup(event)" class="hidden">
-                </label>
-            </div>
-
-            <div class="paper-card rounded-2xl p-4 space-y-3">
-                <h3 class="font-serif text-base font-bold text-espresso">Чистый старт</h3>
-                <p class="text-xs text-taupe leading-relaxed">
-                    В архиве сейчас есть 2 примера записей для наглядности. Нажми кнопку ниже, чтобы очистить их и начать вести свой личный дневник с нуля (твой Манифест останется).
-                </p>
-                <button onclick="confirmClearDemoData()" class="w-full py-2.5 px-4 rounded-xl border border-red-300 bg-red-50/60 text-red-700 font-semibold text-xs btn-tactile">
-                    Очистить демо-данные и начать с чистого листа
-                </button>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- НИЖНЯЯ НАВИГАЦИЯ iOS -->
-    <nav class="bg-paper/95 backdrop-blur-md border-t border-hairline px-2 pt-2 safe-bottom flex items-center justify-around z-30 shrink-0">
-        <button onclick="switchTab('today')" id="nav-today" class="flex-1 flex flex-col items-center gap-1 py-1 text-terracotta transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <span class="text-[10px] font-bold">Сегодня</span>
-        </button>
-
-        <button onclick="switchTab('archive')" id="nav-archive" class="flex-1 flex flex-col items-center gap-1 py-1 text-taupe transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            <span class="text-[10px] font-medium">Архив</span>
-        </button>
-
-        <button onclick="switchTab('manifest')" id="nav-manifest" class="flex-1 flex flex-col items-center gap-1 py-1 text-taupe transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <span class="text-[10px] font-medium">Манифест</span>
-        </button>
-
-        <button onclick="switchTab('backup')" id="nav-backup" class="flex-1 flex flex-col items-center gap-1 py-1 text-taupe transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-            </svg>
-            <span class="text-[10px] font-medium">Бэкап</span>
-        </button>
-    </nav>
-</div>
-
-<script>
-    // ==================== КЛЮЧИ ХРАНИЛИЩА ====================
-    const KEY_ENTRIES = 'mesto_sily_v2_entries';
-    const KEY_MANIFEST = 'mesto_sily_v2_manifest';
-    const KEY_MORNING_DONE = 'mesto_sily_v2_morning_done';
-
-    // ==================== ПЕРСОНАЛЬНЫЙ МАНИФЕСТ ПОЛЬЗОВАТЕЛЯ ====================
-    const INITIAL_MANIFEST = {
-        declaration: `До февраля 2027 года я создаю и запускаю свой стабильный онлайн-доход, который позволяет мне зарабатывать с помощью компьютера из любой точки мира и свободно владеть английским языком.
-
-Взамен я отдаю миру свои лучшие качества: абсолютную надежность, умение глубоко слышать людей, системное мышление и способность доводить сложные проекты до четкого результата. Я каждый день прокачиваю свои навыки, практикую английский и смело тестирую новые возможности.
-
-Я полностью выключаю старый сценарий сомнений и тяжелой борьбы. Мне не нужно надрываться, чтобы заслужить право на хорошую жизнь — я достоин свободы, достатка и успеха по праву рождения. Моя вера в себя растет с каждым конкретным действием. Я уже вижу и чувствую этот результат, и сегодня я делаю уверенный, легкий шаг ему навстречу.`,
-
-        targetSlide: `Я просыпаюсь утром в своем светлом, уютном доме с ощущением полной свободы и спокойной радости. Рядом моя любимая жена, в доме слышен смех наших двоих детей и бегает наша собака. Мне никуда не нужно спешить по будильнику.
-
-Я работаю с компьютера 3–4 часа в день в удовольствие, создавая ценные проекты из любой точки мира. У нас есть финансовая свобода: мы в любой момент можем спонтанно купить билеты и улететь в другую страну на несколько недель всей семьей. Я в отличной физической форме, регулярно тренируюсь, питаюсь качественной едой и с гордостью и легкостью помогаю маме финансово.
-
-Внутри меня — уверенность, легкость и азарт. Душа и разум едины. Мой мир заботится обо мне, и я просто позволяю себе жить этой жизнью.`,
-
-        flashes: [
-            "Старый фильм о том, что всё дается тяжелым трудом и я чего-то недостоин, окончен. Я выбираю другой кадр: уверенность, легкость и азарт.",
-            "У меня уже есть всё, чтобы зарабатывать онлайн: голова, характер, надежность и умение вести проекты. Мне нужно просто действовать без страха.",
-            "Я снижаю важность. Мне не нужно контролировать всё на свете — я делаю свой шаг сегодня, а мир сам выстраивает нужные двери.",
-            "Каждый мой урок английского и каждый шаг в проектах — это кирпичик в фундамент моего дома, моей свободы и благополучия моей семьи.",
-            "Я достоин лучшего просто потому, что я есть. Душа и разум едины."
-        ]
-    };
-
-    // ==================== ДЕМО-ЗАПИСИ ДЛЯ ПРИМЕРА ====================
-    function getDateISO(daysAgo = 0) {
-        const d = new Date();
-        d.setDate(d.getDate() - daysAgo);
-        return d.toISOString().split('T')[0];
-    }
-
-    function formatHumanDate(iso) {
-        const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-        const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-        const [y, m, d] = iso.split('-').map(Number);
-        const dt = new Date(y, m - 1, d);
-        return `${days[dt.getDay()]}, ${d} ${months[m - 1]}`;
-    }
-
-    const SAMPLE_ENTRIES = [
-        {
-            date: getDateISO(1),
-            wins: [
-                "Провел 45 минут за изучением направлений удаленной работы и выписал 3 реальные ниши под мой опыт",
-                "Не поддался утренней тревоге, прочитал Декларацию вслух и поймал спокойный фокус",
-                "Сделал полноценную тренировку и выдержал чистый режим питания"
-            ],
-            englishDone: true,
-            englishNote: "25 минут: слушал подкаст на английском и выписал 12 рабочих фраз",
-            gratitudeHave: "Благодарен за время в Берлине, которое дает возможность пересобрать свою жизнь, за здоровье и поддержку близких.",
-            gratitudeNot: "Благодарен, что стабильный онлайн-доход еще строится — прямо сейчас я учусь управлять своим состоянием и верой в себя.",
-            faith: 8,
-            ease: 8,
-            unity: "Душа и разум едины",
-            proof: "не сдается перед неизвестностью, а шаг за шагом строит свою свободу и верит в себя.",
-            growthLesson: "",
-            growthRelease: "",
-            tomorrowFocus: "Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут."
-        },
-        {
-            date: getDateISO(2),
-            wins: [
-                "Удержал внимание на целевом слайде вместо старых грустных мыслей",
-                "Разобрался в структуре проектных задач и обновил свое резюме/профиль",
-                "Лег спать вовремя без залипания в телефон"
-            ],
-            englishDone: true,
-            englishNote: "20 минут: практика разговорных конструкций вслух",
-            gratitudeHave: "За ясность ума, за книги, которые открывают глаза, и за то, что я начал действовать.",
-            gratitudeNot: "За то, что вокруг нет лишней суеты — можно спокойно сфокусироваться на себе и целях.",
-            faith: 7,
-            ease: 7,
-            unity: "Есть легкое сомнение",
-            proof: "умеет слышать себя, снижать важность и возвращаться в состояние легкости и азарта.",
-            growthLesson: "Когда я тороплю события до февраля, появляется зажим. Спокойный ежедневный шаг работает в 10 раз лучше.",
-            growthRelease: "Отпускаю страх ошибки и разрешаю себе тестировать гипотезы легко.",
-            tomorrowFocus: "Выделить 1 час чистого времени на поиск онлайн-проектов."
-        }
-    ];
-
-    // ==================== СОСТОЯНИЕ ПРИЛОЖЕНИЯ ====================
-    let entries = [];
-    let manifest = {};
-    let morningDoneMap = {};
-    let selectedUnity = "Душа и разум едины";
-    let archiveFilter = "all";
-    let currentFlashIdx = 0;
-    let pendingConfirm = null;
-
-    // Переменные таймера визуализации (60 сек)
+    // Переменные таймера визуализации (60 сек) и Web Audio API
     let timerSeconds = 60;
     let timerInterval = null;
     let isTimerRunning = false;
+    let soundMode = 'ambient'; // 'ambient' | 'ocean' | 'mute'
+    let audioCtx = null;
+    let activeAudioNodes = [];
+    let masterGainNode = null;
+
+    // ==================== ЗВУКОВОЙ ДВИЖОК (WEB AUDIO API) ====================
+    function setSoundMode(mode) {
+        soundMode = mode;
+        ['ambient', 'ocean', 'mute'].forEach(m => {
+            const btn = document.getElementById(`snd-${m}`);
+            if (m === mode) {
+                btn.className = 'py-1.5 px-2 rounded-xl border border-terracotta bg-terracotta/10 text-terracotta text-[11px] font-semibold truncate btn-tactile';
+            } else {
+                btn.className = 'py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile';
+            }
+        });
+        if (isTimerRunning) {
+            stopAmbientAudio();
+            if (soundMode !== 'mute') startAmbientAudio();
+        }
+    }
+
+    function startAmbientAudio() {
+        if (soundMode === 'mute') return;
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            stopAmbientAudio();
+
+            const now = audioCtx.currentTime;
+            masterGainNode = audioCtx.createGain();
+            masterGainNode.gain.setValueAtTime(0.001, now);
+            masterGainNode.gain.exponentialRampToValueAtTime(0.18, now + 2.5);
+            masterGainNode.connect(audioCtx.destination);
+
+            if (soundMode === 'ambient') {
+                // Теплый аккорд Dmaj9 на основе A=432 Гц (D3, A3, F#4, C#5, E5)
+                const freqs = [144.0, 216.0, 362.8, 543.6, 648.0];
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(620, now);
+                filter.connect(masterGainNode);
+
+                // Медленное дыхание (LFO)
+                const lfo = audioCtx.createOscillator();
+                const lfoGain = audioCtx.createGain();
+                lfo.frequency.setValueAtTime(0.12, now);
+                lfoGain.gain.setValueAtTime(180, now);
+                lfo.connect(lfoGain);
+                lfoGain.connect(filter.frequency);
+                lfo.start();
+                activeAudioNodes.push(lfo);
+
+                freqs.forEach((f, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const oscGain = audioCtx.createGain();
+                    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.setValueAtTime(f, now);
+                    osc.detune.setValueAtTime((idx - 2) * 3, now);
+                    oscGain.gain.setValueAtTime(0.16 / freqs.length, now);
+                    osc.connect(oscGain);
+                    oscGain.connect(filter);
+                    osc.start();
+                    activeAudioNodes.push(osc);
+                });
+            } else if (soundMode === 'ocean') {
+                // Мягкий розовый шум океана с волновым фильтром
+                const bufferSize = audioCtx.sampleRate * 4;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = buffer.getChannelData(0);
+                let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+                for (let i = 0; i < bufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    b0 = 0.99886 * b0 + white * 0.0555179;
+                    b1 = 0.99332 * b1 + white * 0.0750759;
+                    b2 = 0.96900 * b2 + white * 0.1538520;
+                    b3 = 0.86650 * b3 + white * 0.3104856;
+                    b4 = 0.55000 * b4 + white * 0.5329522;
+                    b5 = -0.7616 * b5 - white * 0.0168980;
+                    output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+                    b6 = white * 0.115926;
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                noise.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(380, now);
+
+                const waveLfo = audioCtx.createOscillator();
+                const waveGain = audioCtx.createGain();
+                waveLfo.frequency.setValueAtTime(0.09, now); // ~11 сек цикл волны
+                waveGain.gain.setValueAtTime(220, now);
+                waveLfo.connect(waveGain);
+                waveGain.connect(filter.frequency);
+
+                noise.connect(filter);
+                filter.connect(masterGainNode);
+
+                noise.start();
+                waveLfo.start();
+                activeAudioNodes.push(noise, waveLfo);
+            }
+        } catch (e) {
+            console.warn('Audio init skipped:', e);
+        }
+    }
+
+    function stopAmbientAudio() {
+        try {
+            if (masterGainNode && audioCtx) {
+                const now = audioCtx.currentTime;
+                masterGainNode.gain.cancelScheduledValues(now);
+                masterGainNode.gain.setValueAtTime(Math.max(masterGainNode.gain.value, 0.001), now);
+                masterGainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+            }
+            const nodesToStop = [...activeAudioNodes];
+            activeAudioNodes = [];
+            setTimeout(() => {
+                nodesToStop.forEach(n => {
+                    try { n.stop(); n.disconnect(); } catch (_) {}
+                });
+            }, 650);
+        } catch (_) {}
+    }
+
+    function playCompletionBowl() {
+        if (soundMode === 'mute') return;
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const now = audioCtx.currentTime;
+            // Резонансный удар тибетской поющей чаши (432 Гц + обертон)
+            [432, 864 * 1.003].forEach((freq, i) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.linearRampToValueAtTime(i === 0 ? 0.22 : 0.07, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 4.3);
+            });
+        } catch (_) {}
+    }
 
     // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     function init() {
@@ -902,11 +920,13 @@
         if (isTimerRunning) {
             clearInterval(timerInterval);
             isTimerRunning = false;
+            stopAmbientAudio();
             document.getElementById('timer-btn-icon').textContent = '▶';
             document.getElementById('timer-btn-label').textContent = 'Продолжить';
         } else {
             if (timerSeconds <= 0) timerSeconds = 60;
             isTimerRunning = true;
+            startAmbientAudio();
             document.getElementById('timer-btn-icon').textContent = '⏸';
             document.getElementById('timer-btn-label').textContent = 'Пауза';
 
@@ -916,6 +936,8 @@
                 if (timerSeconds <= 0) {
                     clearInterval(timerInterval);
                     isTimerRunning = false;
+                    stopAmbientAudio();
+                    playCompletionBowl();
                     document.getElementById('timer-btn-icon').textContent = '↻';
                     document.getElementById('timer-btn-label').textContent = 'Повторить 60 сек';
                     showToast('Визуализация завершена. Слайд закреплен в подсознании.', '🌿');
@@ -927,6 +949,7 @@
     function resetVisualizationTimer() {
         clearInterval(timerInterval);
         isTimerRunning = false;
+        stopAmbientAudio();
         timerSeconds = 60;
         updateTimerUI();
         document.getElementById('timer-btn-icon').textContent = '▶';
