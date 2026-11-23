@@ -1,1443 +1,919 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Место Силы">
-    <meta name="theme-color" content="#FAF7F2">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23FAF7F2'/%3E%3Ccircle cx='90' cy='90' r='54' fill='none' stroke='%23B86B35' stroke-width='5'/%3E%3Ccircle cx='90' cy='90' r='16' fill='%23B86B35'/%3E%3Cpath d='M90 22v16M90 142v16M22 90h16M142 90h16M42 42l11 11M127 127l11 11M138 42l-11 11M53 127l-11 11' stroke='%23B86B35' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-    <title>Место Силы — Дневник побед, Декларация и Целевой Слайд</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Lora & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ivory: '#FAF7F2',
-                        paper: '#FFFFFF',
-                        warmSand: '#F3EDE2',
-                        hairline: '#E6DEC8',
-                        espresso: '#2C2621',
-                        taupe: '#7A7067',
-                        terracotta: '#B86B35',
-                        terracottaDark: '#9A5627',
-                        sage: '#4A7C59',
-                        sageSoft: '#EAF2EC',
-                    },
-                    fontFamily: {
-                        serif: ['Lora', 'Georgia', 'serif'],
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        * {
-            -webkit-tap-highlight-color: transparent;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #EAE3D5;
-            color: #2C2621;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* Имитация корпуса iPhone на десктопе, нативный вид на мобильных */
-        .app-shell {
-            background-color: #FAF7F2;
-            min-height: 100dvh;
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 60px -15px rgba(44, 38, 33, 0.2);
-        }
-
-        @media (min-width: 520px) {
-            body {
-                padding: 20px 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .app-shell {
-                min-height: 860px;
-                height: 92dvh;
-                max-height: 940px;
-                border-radius: 44px;
-                border: 8px solid #2C2621;
-                overflow: hidden;
-            }
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Стилизация слайдеров */
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 7px;
-            background: #E6DEC8;
-            border-radius: 999px;
-            outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #B86B35;
-            border: 3px solid #FFFFFF;
-            box-shadow: 0 3px 8px rgba(184, 107, 53, 0.35);
-            cursor: pointer;
-            transition: transform 0.15s ease;
-        }
-
-        input[type="range"].sage-slider::-webkit-slider-thumb {
-            background: #4A7C59;
-            box-shadow: 0 3px 8px rgba(74, 124, 89, 0.35);
-        }
-
-        input[type="range"]::-webkit-slider-thumb:active {
-            transform: scale(1.15);
-        }
-
-        /* Плавные анимации */
-        .fade-in {
-            animation: fadeIn 0.24s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .btn-tactile {
-            transition: transform 0.12s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .btn-tactile:active {
-            transform: scale(0.97);
-        }
-
-        .paper-card {
-            background-color: #FFFFFF;
-            border: 1px solid #E6DEC8;
-            box-shadow: 0 2px 12px rgba(44, 38, 33, 0.03);
-        }
-
-        .safe-bottom {
-            padding-bottom: max(14px, env(safe-area-inset-bottom));
-        }
-        .safe-top {
-            padding-top: max(16px, env(safe-area-inset-top));
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Место Силы" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <title>Место Силы</title>
+  <link id="appleIcon" rel="apple-touch-icon" href="" />
+  <style>
+    :root {
+      --bg: #F7F4EE;
+      --card: #FFFDF9;
+      --card-soft: #EFEAE1;
+      --ink: #241F1A;
+      --muted: #766D63;
+      --accent: #B4692A;
+      --accent-soft: #F3E5D5;
+      --green: #3E6B4C;
+      --green-soft: #E5EFE8;
+      --border: #E5DEC9;
+      --shadow: 0 4px 18px rgba(36, 31, 26, 0.05);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      touch-action: manipulation;
+    }
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: calc(84px + env(safe-area-inset-bottom));
+    }
+    .serif { font-family: Georgia, "Times New Roman", serif; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 14px 16px; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: #F7F4EE;
+      border-bottom: 1px solid var(--border);
+      padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+    }
+    .head-row {
+      max-width: 520px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .date-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+    h1 { margin: 2px 0 0; font-size: 22px; font-weight: 700; }
+    button {
+      font-family: inherit; cursor: pointer; touch-action: manipulation;
+      border: none; outline: none; transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+    button:active { transform: scale(0.98); }
+    .btn-slide {
+      background: var(--card); border: 1px solid var(--border); color: var(--ink);
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 600;
+      box-shadow: var(--shadow); white-space: nowrap;
+    }
+    .btn-slide span { color: var(--accent); margin-right: 4px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 16px; margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .card-dark {
+      background: #241F1A; color: #FAF7F2; border-color: #241F1A;
+    }
+    .tag {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+      font-weight: 700; color: var(--accent); margin-bottom: 4px;
+    }
+    .card-dark .tag { color: #D89A5B; }
+    .card-title { font-size: 18px; font-weight: 700; margin: 0 0 10px; }
+    .divider { height: 1px; background: var(--border); margin: 10px 0; }
+    .body-text { font-size: 15px; white-space: pre-line; color: #362F28; }
+    .seg {
+      display: flex; background: var(--card-soft); padding: 4px;
+      border-radius: 14px; margin-bottom: 14px; border: 1px solid var(--border);
+    }
+    .seg button {
+      flex: 1; padding: 10px 8px; border-radius: 11px; font-size: 14px; font-weight: 600;
+      background: transparent; color: var(--muted);
+    }
+    .seg button.active {
+      background: var(--card); color: var(--ink);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .stat-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 10px 8px; text-align: center;
+    }
+    .stat-num { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .stat-lbl { font-size: 11px; color: var(--muted); }
+    .sound-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
+    .snd-btn {
+      padding: 8px 4px; border-radius: 10px; font-size: 12px; font-weight: 600;
+      background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+    }
+    .snd-btn.active {
+      background: var(--accent-soft); border-color: var(--accent); color: var(--ink);
+    }
+    .prog-bar {
+      height: 6px; background: var(--card-soft); border-radius: 999px;
+      overflow: hidden; margin: 10px 0 12px;
+    }
+    .prog-fill { height: 100%; width: 100%; background: var(--accent); transition: width 0.3s linear; }
+    .row-btns { display: flex; gap: 8px; }
+    .btn-soft {
+      flex: 1; padding: 11px; border-radius: 12px; font-size: 14px; font-weight: 600;
+      background: var(--card-soft); color: var(--ink); border: 1px solid var(--border);
+    }
+    .btn-reset {
+      padding: 11px 14px; border-radius: 12px; font-size: 14px; font-weight: 600;
+      background: var(--card); color: var(--muted); border: 1px solid var(--border);
+    }
+    .btn-primary {
+      width: 100%; padding: 14px; border-radius: 14px; font-size: 15px; font-weight: 700;
+      background: var(--accent); color: #FFF; box-shadow: 0 4px 14px rgba(180,105,42,0.28);
+    }
+    .btn-primary.done { background: var(--green); box-shadow: none; }
+    input[type="text"], textarea {
+      width: 100%; padding: 11px 12px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--ink);
+      font-family: inherit; font-size: 14px; margin-bottom: 8px; outline: none;
+    }
+    input[type="text"]:focus, textarea:focus { border-color: var(--accent); background: #FFF; }
+    textarea { resize: vertical; min-height: 68px; }
+    label.field-lbl { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin: 6px 0 4px; }
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; background: var(--green-soft); border-radius: 12px;
+      margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--green);
+    }
+    input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--green); }
+    input[type="range"] { width: 100%; accent-color: var(--accent); margin: 4px 0 10px; }
+    .align-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+    .align-btn {
+      padding: 10px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;
+      background: var(--bg); border: 1px solid var(--border); color: var(--muted); text-align: center;
+    }
+    .align-btn.active { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+    .nav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 25;
+      background: #FFFDF9; border-top: 1px solid var(--border);
+      padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    }
+    .nav-inner { max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .nav button {
+      background: transparent; color: var(--muted); font-size: 11px; font-weight: 600;
+      padding: 4px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .nav button.active { color: var(--accent); }
+    .nav-ico { font-size: 18px; }
+    .view { display: none; }
+    .view.active { display: block; }
+    .modal-bg {
+      display: none; position: fixed; inset: 0; z-index: 50;
+      background: rgba(36,31,26,0.65); padding: 20px 16px;
+      align-items: center; justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 20px; max-width: 460px; width: 100%;
+    }
+    .toast {
+      position: fixed; top: calc(64px + env(safe-area-inset-top)); left: 50%;
+      transform: translateX(-50%); background: #241F1A; color: #FFF;
+      padding: 10px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .toast.show { opacity: 1; }
+    .pill {
+      display: inline-block; padding: 3px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 600; background: var(--accent-soft); color: var(--accent);
+      margin-right: 4px; margin-bottom: 4px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="app-shell">
+<div id="toast" class="toast">Сохранено</div>
 
-    <!-- Всплывающее уведомление (Toast) -->
-    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2 w-[90%] max-w-[400px]">
-        <div class="bg-espresso text-ivory px-4 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-taupe/25">
-            <span id="toast-icon" class="text-lg">✨</span>
-            <p id="toast-text" class="text-sm font-medium leading-snug">Сохранено</p>
-        </div>
+<header>
+  <div class="head-row">
+    <div>
+      <div id="todayDate" class="date-lbl">СЕГОДНЯ</div>
+      <h1 class="serif">Место Силы</h1>
+    </div>
+    <button type="button" class="btn-slide" onclick="openSlideModal()"><span>✦</span>Сменить слайд</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- ВКЛАДКА 1: СЕГОДНЯ -->
+  <section id="view-today" class="view active">
+    <div class="stats">
+      <div class="stat-box"><div id="stDays" class="stat-num">0</div><div class="stat-lbl">Дней подряд</div></div>
+      <div class="stat-box"><div id="stWins" class="stat-num">0</div><div class="stat-lbl">Всего побед</div></div>
+      <div class="stat-box"><div id="stEng" class="stat-num">0</div><div class="stat-lbl">Дней English</div></div>
     </div>
 
-    <!-- Модальное окно подтверждения -->
-    <div id="confirm-modal" class="hidden absolute inset-0 z-50 bg-espresso/45 backdrop-blur-xs flex items-center justify-center p-5">
-        <div class="bg-paper border border-hairline rounded-3xl p-6 w-full max-w-[350px] shadow-2xl fade-in">
-            <h3 id="modal-title" class="font-serif text-lg font-bold text-espresso mb-2">Подтверждение</h3>
-            <p id="modal-desc" class="text-sm text-taupe leading-relaxed mb-5">Вы уверены?</p>
-            <div class="flex gap-3">
-                <button onclick="closeConfirmModal()" class="flex-1 py-2.5 px-4 rounded-xl bg-warmSand text-espresso font-medium text-sm btn-tactile">Отмена</button>
-                <button id="modal-confirm-btn" class="flex-1 py-2.5 px-4 rounded-xl bg-terracotta text-white font-medium text-sm btn-tactile">Подтвердить</button>
-            </div>
-        </div>
+    <div class="seg">
+      <button type="button" id="tabMornBtn" class="active" onclick="switchSubMode('morning')">☀️ Утренний настрой</button>
+      <button type="button" id="tabEveBtn" onclick="switchSubMode('evening')">🌙 Итоги вечера</button>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО: АНТИ-МАЯТНИК / «СМЕНИТЬ СЛАЙД» -->
-    <div id="slide-switcher-modal" class="hidden absolute inset-0 z-40 bg-espresso/55 backdrop-blur-xs flex items-end sm:items-center justify-center p-3 sm:p-5">
-        <div class="bg-ivory border border-hairline rounded-3xl p-5 w-full max-w-[430px] shadow-2xl space-y-4 fade-in max-h-[90dvh] overflow-y-auto no-scrollbar">
-            <div class="flex items-center justify-between border-b border-hairline pb-3">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-terracotta animate-pulse"></span>
-                    <h3 class="font-serif text-lg font-bold text-espresso">Переключение слайда</h3>
-                </div>
-                <button onclick="closeSlideSwitcher()" class="w-8 h-8 rounded-full bg-warmSand text-taupe hover:text-espresso flex items-center justify-center text-sm font-bold btn-tactile">✕</button>
-            </div>
-
-            <!-- 3 шага сброса важности -->
-            <div class="bg-warmSand/90 rounded-2xl p-3.5 border border-hairline space-y-2">
-                <p class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Сброс маятника за 30 секунд</p>
-                <ul class="space-y-1.5 text-xs text-espresso font-medium">
-                    <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-paper text-terracotta flex items-center justify-center text-[11px] font-bold shrink-0">1</span> Глубокий выдох и полное расслабление плеч</li>
-                    <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-paper text-terracotta flex items-center justify-center text-[11px] font-bold shrink-0">2</span> Выключаю старый «грустный слайд» сомнений</li>
-                    <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-paper text-sage flex items-center justify-center text-[11px] font-bold shrink-0">3</span> Включаю уверенность, легкость и азарт</li>
-                </ul>
-            </div>
-
-            <!-- Слайд-вспышка -->
-            <div class="paper-card rounded-2xl p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-semibold uppercase tracking-wider text-terracotta">Твой новый кадр</span>
-                    <button onclick="nextSlideFlash()" class="text-xs font-medium text-taupe hover:text-espresso flex items-center gap-1 bg-warmSand px-2.5 py-1 rounded-lg btn-tactile">
-                        <span>Другая вспышка</span>
-                        <span>↻</span>
-                    </button>
-                </div>
-                <p id="modal-flash-text" class="font-serif italic text-[15px] text-espresso leading-relaxed">
-                    «Старый фильм о том, что всё дается тяжелым трудом и я чего-то недостоин, окончен. Я выбираю другой кадр: уверенность, легкость и азарт.»
-                </p>
-            </div>
-
-            <!-- Реальное доказательство из архива -->
-            <div class="bg-sageSoft border border-sage/25 rounded-2xl p-3.5 space-y-1.5">
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-semibold uppercase tracking-wider text-sage">Факт из твоего архива побед</span>
-                    <button onclick="refreshModalVictory()" class="text-[11px] text-sage underline">Ещё факт</button>
-                </div>
-                <p id="modal-victory-text" class="text-xs text-espresso font-medium leading-relaxed">
-                    Загрузка победы...
-                </p>
-            </div>
-
-            <button onclick="closeSlideSwitcher()" class="w-full py-3.5 rounded-2xl bg-espresso text-ivory font-semibold text-sm btn-tactile">
-                Я в новом слайде • Продолжить день
-            </button>
+    <!-- УТРО -->
+    <div id="sub-morning">
+      <div class="card card-dark">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="tag">ФОКУС НА СЕГОДНЯШНИЙ ДЕНЬ</div>
+          <span style="font-size:12px;color:#B8AFA4;">Вектор</span>
         </div>
+        <div id="morningFocusText" class="serif" style="font-size:16px;margin-top:4px;"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div class="tag">МЕТОД НАПОЛЕОНА ХИЛЛА</div>
+            <h2 class="card-title serif">Моя Декларация Силы</h2>
+          </div>
+          <span style="font-size:22px;">🔥</span>
+        </div>
+        <div class="divider"></div>
+        <div id="morningDeclText" class="body-text"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div class="tag">ТРАНСЕРФИНГ РЕАЛЬНОСТИ</div>
+            <h2 class="card-title serif">Мой Целевой Слайд</h2>
+          </div>
+          <span style="font-size:22px;">🌿</span>
+        </div>
+        <div class="divider"></div>
+        <div id="morningSlideText" class="body-text"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:700;font-size:15px;">Таймер визуализации: 60 сек</div>
+            <div style="font-size:12px;color:var(--muted);">Закрой глаза после чтения и прочувствуй слайд</div>
+          </div>
+          <div id="timerDisplay" class="serif" style="font-size:26px;font-weight:700;color:var(--accent);">01:00</div>
+        </div>
+
+        <div class="sound-row">
+          <button type="button" id="snd-ambient" class="snd-btn active" onclick="setSoundMode('ambient')">🌿 432 Гц</button>
+          <button type="button" id="snd-ocean" class="snd-btn" onclick="setSoundMode('ocean')">🌊 Океан</button>
+          <button type="button" id="snd-mute" class="snd-btn" onclick="setSoundMode('mute')">🔇 Тишина</button>
+        </div>
+
+        <div class="prog-bar"><div id="timerProg" class="prog-fill"></div></div>
+
+        <div class="row-btns">
+          <button type="button" id="timerStartBtn" class="btn-soft" onclick="toggleTimer()">▶ Запустить 60 сек</button>
+          <button type="button" class="btn-reset" onclick="resetTimer()">Сброс</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px;">
+          Для звука на iPhone выключи бесшумный режим боковой кнопкой
+        </div>
+      </div>
+
+      <button type="button" id="mornDoneBtn" class="btn-primary" onclick="completeMorning()">☀️ Я в фокусе • Утро засчитано</button>
     </div>
 
-    <!-- ПОСТОЯННАЯ ШАПКА ПРИЛОЖЕНИЯ -->
-    <header class="px-5 safe-top pb-3 bg-ivory/95 backdrop-blur-md border-b border-hairline/70 flex items-center justify-between shrink-0 z-20">
-        <div>
-            <p id="header-date" class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Понедельник, 23 ноября</p>
-            <div class="flex items-baseline gap-2">
-                <h1 class="font-serif text-xl font-bold text-espresso tracking-tight">Место Силы</h1>
-                <span class="text-[11px] text-taupe hidden sm:inline">Единство души и разума</span>
-            </div>
+    <!-- ВЕЧЕР -->
+    <div id="sub-evening" style="display:none;">
+      <div class="card">
+        <div class="tag">ШАГ 1 • ДОКАЗАТЕЛЬСТВА СИЛЫ</div>
+        <h2 class="card-title serif">3 произвольные победы дня</h2>
+        <input type="text" id="win1" placeholder="1. Главная победа или шаг к онлайн-доходу..." />
+        <input type="text" id="win2" placeholder="2. Дисциплина, тренировка или решение задачи..." />
+        <input type="text" id="win3" placeholder="3. Маленькая победа, которой я горжусь..." />
+      </div>
+
+      <div class="card">
+        <div class="tag">ШАГ 2 • ЕЖЕДНЕВНЫЙ НАВЫК</div>
+        <h2 class="card-title serif">Практика английского</h2>
+        <label class="toggle-row">
+          <span>🇬🇧 Занимался английским сегодня</span>
+          <input type="checkbox" id="engDone" />
+        </label>
+        <input type="text" id="engNote" placeholder="Что именно делал (слова, подкаст, разговор)..." />
+      </div>
+
+      <div class="card">
+        <div class="tag">ШАГ 3 • ПОЗИТИВНЫЙ ФОКУС</div>
+        <h2 class="card-title serif">Благодарность</h2>
+        <label class="field-lbl">За что я благодарен сегодня (что есть):</label>
+        <textarea id="gratHave" placeholder="Люди, здоровье, возможности, события дня..."></textarea>
+        <label class="field-lbl">За что благодарен из того, чего ПОКА НЕТ (как за ресурс и рост):</label>
+        <textarea id="gratNotYet" placeholder="Например: благодарю за путь к финансовой свободе, который закаляет меня..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="tag">ШАГ 4 • НАПОЛЕОН ХИЛЛ + ВАДИМ ЗЕЛАНД</div>
+        <h2 class="card-title serif">Настройка подсознания</h2>
+        <label class="field-lbl">Уровень веры в себя (Хилл): <strong id="faithVal">8</strong>/10</label>
+        <input type="range" id="faithRange" min="1" max="10" value="8" oninput="document.getElementById('faithVal').textContent=this.value" />
+
+        <label class="field-lbl">Легкость и снятие зажима (Зеланд): <strong id="easeVal">8</strong>/10</label>
+        <input type="range" id="easeRange" min="1" max="10" value="8" oninput="document.getElementById('easeVal').textContent=this.value" />
+
+        <label class="field-lbl">Состояние души и разума:</label>
+        <div class="align-grid">
+          <button type="button" id="al-unity" class="align-btn active" onclick="setAlign('unity')">✨ Душа и разум едины</button>
+          <button type="button" id="al-tension" class="align-btn" onclick="setAlign('tension')">⚡ Разум давит (снизить важность)</button>
         </div>
 
-        <!-- Кнопка Анти-маятник / Сменить слайд -->
-        <button onclick="openSlideSwitcher()" class="px-3.5 py-2 rounded-xl bg-warmSand hover:bg-hairline/70 border border-hairline text-espresso text-xs font-semibold flex items-center gap-1.5 shadow-2xs btn-tactile">
-            <span class="text-terracotta">✦</span>
-            <span>Сменить слайд</span>
-        </button>
-    </header>
+        <label class="field-lbl" style="margin-top:10px;">Доказательство подсознанию (почему я достоин своих целей):</label>
+        <textarea id="proofText" placeholder="Сегодня я доказал себе, что я человек, который..."></textarea>
+      </div>
 
-    <!-- ОСНОВНАЯ ПРОКРУЧИВАЕМАЯ ОБЛАСТЬ -->
-    <main id="main-scroll" class="flex-1 overflow-y-auto no-scrollbar px-5 pt-4 pb-28">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;" onclick="toggleGrowth()">
+          <div>
+            <div class="tag">ОПЦИОНАЛЬНО • ТРАНСФОРМАЦИЯ</div>
+            <div style="font-weight:700;font-size:15px;">🌱 Точка роста (если было неприятное)</div>
+          </div>
+          <span id="growthArrow" style="font-size:18px;color:var(--muted);">▾</span>
+        </div>
+        <div id="growthBox" style="display:none;margin-top:10px;">
+          <label class="field-lbl">Какой урок или силу дала мне эта ситуация?</label>
+          <textarea id="growthLesson" placeholder="Координация намерения: любую ситуацию я превращаю в плюс..."></textarea>
+          <label class="field-lbl">Снижаю важность — что я отпускаю прямо сейчас?</label>
+          <input type="text" id="growthRelease" placeholder="Отпускаю контроль и напряжение по поводу..." />
+        </div>
+      </div>
 
-        <!-- ==================== ВКЛАДКА 1: СЕГОДНЯ ==================== -->
-        <section id="view-today" class="fade-in space-y-5">
+      <div class="card">
+        <div class="tag">ШАГ 5 • ВЕКТОР НА ЗАВТРА</div>
+        <h2 class="card-title serif">1 главный фокус на завтра</h2>
+        <input type="text" id="nextFocusInput" placeholder="Главная задача, которая встретит меня завтра утром..." />
+      </div>
 
-            <!-- Переключатель Утро / Вечер -->
-            <div class="bg-warmSand p-1 rounded-2xl border border-hairline grid grid-cols-2 gap-1">
-                <button id="btn-mode-morning" onclick="setTodayMode('morning')" class="py-2.5 px-3 rounded-xl bg-paper text-espresso font-semibold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all">
-                    <span>☀️</span>
-                    <span>Утренний настрой</span>
-                </button>
-                <button id="btn-mode-evening" onclick="setTodayMode('evening')" class="py-2.5 px-3 rounded-xl text-taupe font-medium text-xs flex items-center justify-center gap-1.5 transition-all">
-                    <span>🌙</span>
-                    <span>Итоги вечера</span>
-                </button>
-            </div>
+      <button type="button" class="btn-primary" onclick="saveEvening()">🌙 Зафиксировать итоги дня</button>
+    </div>
+  </section>
 
-            <!-- РЕЖИМ А: УТРЕННИЙ НАСТРОЙ (Чтение и визуализация без набора текста) -->
-            <div id="today-morning-view" class="space-y-4 fade-in">
+  <!-- ВКЛАДКА 2: АРХИВ -->
+  <section id="view-archive" class="view">
+    <div class="card card-dark">
+      <div class="tag">БАНК ДОКАЗАТЕЛЬСТВ</div>
+      <h2 class="card-title serif">Вспомнить свою силу</h2>
+      <p style="font-size:13px;color:#D6CEC2;margin:0 0 12px;">Нажми, когда нужно напомнить мозгу, на что ты способен на самом деле.</p>
+      <button type="button" class="btn-primary" onclick="showRandomWin()">⚡ Показать случайную победу</button>
+      <div id="randomWinBox" style="display:none;margin-top:12px;padding:12px;background:rgba(255,255,255,0.08);border-radius:12px;font-size:14px;"></div>
+    </div>
 
-                <!-- Главный фокус на сегодня (подтягивается из вчерашнего вечера) -->
-                <div class="bg-espresso text-ivory rounded-2xl p-4 shadow-md space-y-1.5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-semibold uppercase tracking-wider text-terracotta">Фокус на сегодняшний день</span>
-                        <span class="text-xs text-ivory/70">Вектор</span>
-                    </div>
-                    <p id="morning-today-focus" class="font-serif text-[15px] leading-snug text-ivory">
-                        Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут.
-                    </p>
-                </div>
+    <input type="text" id="searchInput" placeholder="🔍 Поиск по победам и записям..." oninput="renderArchive()" />
+    <div id="archiveList"></div>
+  </section>
 
-                <!-- Карточка 1: Моя Декларация (по Н. Хиллу) -->
-                <article class="paper-card rounded-2xl p-5 space-y-3">
-                    <div class="flex items-center justify-between border-b border-hairline pb-2.5">
-                        <div>
-                            <span class="text-[10px] font-semibold uppercase tracking-wider text-terracotta">Метод Наполеона Хилла</span>
-                            <h2 class="font-serif text-base font-bold text-espresso">Моя Декларация Силы</h2>
-                        </div>
-                        <span class="text-lg">🔥</span>
-                    </div>
-                    <div id="morning-declaration-text" class="font-serif text-[15px] leading-[1.68] text-espresso space-y-3">
-                        <!-- Заполняется из данных пользователя -->
-                    </div>
-                </article>
+  <!-- ВКЛАДКА 3: МАНИФЕСТ -->
+  <section id="view-manifest" class="view">
+    <div class="card">
+      <div class="tag">БАЗА УТРЕННЕГО ЧТЕНИЯ</div>
+      <h2 class="card-title serif">Редактор Декларации и Слайда</h2>
+      <p style="font-size:12px;color:var(--muted);margin-top:0;">Здесь лежат твои базовые тексты. Можешь дополнять их по мере роста.</p>
 
-                <!-- Карточка 2: Мой Целевой Слайд (по В. Зеланду) -->
-                <article class="paper-card rounded-2xl p-5 space-y-3 bg-gradient-to-b from-paper to-warmSand/30">
-                    <div class="flex items-center justify-between border-b border-hairline pb-2.5">
-                        <div>
-                            <span class="text-[10px] font-semibold uppercase tracking-wider text-sage">Трансерфинг Реальности</span>
-                            <h2 class="font-serif text-base font-bold text-espresso">Мой Целевой Слайд</h2>
-                        </div>
-                        <span class="text-lg">🌿</span>
-                    </div>
-                    <div id="morning-slide-text" class="font-serif italic text-[15px] leading-[1.68] text-espresso space-y-3">
-                        <!-- Заполняется из данных пользователя -->
-                    </div>
-                </article>
+      <label class="field-lbl">Главная Декларация Силы (Наполеон Хилл):</label>
+      <textarea id="editDecl" style="min-height:140px;"></textarea>
 
-                <!-- Таймер визуализации на 60 секунд -->
-                <div class="paper-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-sm font-bold text-espresso">Таймер визуализации: 60 сек</h3>
-                            <p class="text-xs text-taupe">Закрой глаза после чтения и прочувствуй слайд</p>
-                        </div>
-                        <div id="timer-display" class="font-serif text-2xl font-bold text-terracotta tabular-nums">
-                            01:00
-                        </div>
-                    </div>
+      <label class="field-lbl">Мой Целевой Слайд (Вадим Зеланд):</label>
+      <textarea id="editSlide" style="min-height:140px;"></textarea>
 
-                    <!-- Выбор фонового звука (Web Audio API) -->
-                    <div class="grid grid-cols-3 gap-1.5" id="sound-mode-pills">
-                        <button type="button" onclick="setSoundMode('ambient')" id="snd-ambient" class="py-1.5 px-2 rounded-xl border border-terracotta bg-terracotta/10 text-terracotta text-[11px] font-semibold truncate btn-tactile">
-                            🌿 Эмбиент 432 Гц
-                        </button>
-                        <button type="button" onclick="setSoundMode('ocean')" id="snd-ocean" class="py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile">
-                            🌊 Шум океана
-                        </button>
-                        <button type="button" onclick="setSoundMode('mute')" id="snd-mute" class="py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile">
-                            🔇 Без звука
-                        </button>
-                    </div>
+      <label class="field-lbl">Слайды-вспышки (каждый с новой строки):</label>
+      <textarea id="editFlashes" style="min-height:110px;"></textarea>
 
-                    <!-- Прогресс-бар таймера -->
-                    <div class="w-full h-2 bg-warmSand rounded-full overflow-hidden">
-                        <div id="timer-progress-bar" class="h-full bg-terracotta transition-all duration-300 rounded-full" style="width: 100%"></div>
-                    </div>
+      <button type="button" class="btn-primary" onclick="saveManifest()">💾 Сохранить изменения в Манифесте</button>
+    </div>
+  </section>
 
-                    <div class="flex gap-2">
-                        <button id="timer-start-btn" onclick="toggleVisualizationTimer()" class="flex-1 py-2.5 px-4 rounded-xl bg-warmSand hover:bg-hairline/70 text-espresso font-semibold text-xs flex items-center justify-center gap-1.5 btn-tactile">
-                            <span id="timer-btn-icon">▶</span>
-                            <span id="timer-btn-label">Запустить 60 сек</span>
-                        </button>
-                        <button onclick="resetVisualizationTimer()" class="py-2.5 px-3.5 rounded-xl border border-hairline text-taupe hover:text-espresso text-xs font-medium btn-tactile">
-                            Сброс
-                        </button>
-                    </div>
-                    <p class="text-[10px] text-taupe text-center">Для звука на iPhone выключи бесшумный режим боковой кнопкой</p>
-                </div>
+  <!-- ВКЛАДКА 4: БЭКАП -->
+  <section id="view-backup" class="view">
+    <div class="card">
+      <div class="tag">100% КОНФИДЕНЦИАЛЬНОСТЬ</div>
+      <h2 class="card-title serif">Твои данные только на iPhone</h2>
+      <p style="font-size:13px;color:var(--muted);">Ни одна запись не отправляется в интернет. Чтобы не потерять дневник при смене телефона, сохраняй файл резервной копии в iCloud Drive.</p>
+      <button type="button" class="btn-primary" style="margin-bottom:10px;" onclick="exportBackup()">⬇️ Скачать бэкап (.json) в Файлы</button>
+      <button type="button" class="btn-soft" style="width:100%;margin-bottom:10px;" onclick="document.getElementById('importFile').click()">⬆️ Восстановить из файла</button>
+      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importBackup(event)" />
+    </div>
 
-                <!-- Кнопка завершения утреннего ритуала -->
-                <div class="pt-1 pb-2">
-                    <button id="btn-complete-morning" onclick="toggleMorningComplete()" class="w-full py-4 px-5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-[15px] shadow-lg shadow-terracotta/20 flex items-center justify-center gap-2 btn-tactile">
-                        <span>☀️ Я в фокусе • Утро засчитано</span>
-                    </button>
-                </div>
-            </div>
+    <div class="card">
+      <div class="tag">УПРАВЛЕНИЕ ЗАПИСЯМИ</div>
+      <h2 class="card-title serif">Начать с чистого листа</h2>
+      <p style="font-size:13px;color:var(--muted);">Удалит стартовые демо-примеры и обнулит счетчики, оставив твою Декларацию и Целевой Слайд.</p>
+      <button type="button" class="btn-reset" style="width:100%;color:#B83A2D;border-color:#E6B8B3;" onclick="clearDemoData()">🗑 Очистить демо-примеры</button>
+    </div>
+  </section>
+</main>
 
-            <!-- РЕЖИМ Б: ИТОГИ ВЕЧЕРА -->
-            <div id="today-evening-view" class="hidden space-y-4 fade-in">
+<!-- МОДАЛЬНОЕ ОКНО: СМЕНИТЬ СЛАЙД -->
+<div id="slideModal" class="modal-bg" onclick="if(event.target===this)closeSlideModal()">
+  <div class="modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="tag">АНТИ-МАЯТНИК • ПЕРЕКЛЮЧЕНИЕ</div>
+      <button type="button" onclick="closeSlideModal()" style="background:none;font-size:20px;color:var(--muted);">✕</button>
+    </div>
+    <h2 class="card-title serif">Выключаем старый слайд</h2>
+    <div style="padding:12px;background:var(--accent-soft);border-radius:14px;font-size:15px;font-weight:500;margin-bottom:12px;" id="modalFlashText"></div>
+    <div style="padding:12px;background:var(--green-soft);border-radius:14px;font-size:13px;color:var(--green);margin-bottom:14px;" id="modalWinText"></div>
+    <div class="row-btns">
+      <button type="button" class="btn-soft" onclick="nextFlashInModal()">↻ Другой слайд</button>
+      <button type="button" class="btn-primary" style="flex:1;" onclick="closeSlideModal()">Я в ресурсе</button>
+    </div>
+  </div>
+</div>
 
-                <!-- Мини-статистика: Серия, Победы, Английский -->
-                <div class="grid grid-cols-3 gap-2.5">
-                    <div class="paper-card rounded-2xl p-3 text-center">
-                        <div class="text-[11px] text-taupe font-medium">Серия</div>
-                        <div id="stat-streak" class="font-serif text-lg font-bold text-espresso mt-0.5">3 дн.</div>
-                    </div>
-                    <div class="paper-card rounded-2xl p-3 text-center">
-                        <div class="text-[11px] text-taupe font-medium">Побед</div>
-                        <div id="stat-wins" class="font-serif text-lg font-bold text-terracotta mt-0.5">6</div>
-                    </div>
-                    <div class="paper-card rounded-2xl p-3 text-center">
-                        <div class="text-[11px] text-taupe font-medium">English</div>
-                        <div id="stat-english" class="font-serif text-lg font-bold text-sage mt-0.5">2 дн.</div>
-                    </div>
-                </div>
+<!-- НИЖНЯЯ НАВИГАЦИЯ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button type="button" id="nav-today" class="active" onclick="switchView('today')"><span class="nav-ico">☀️</span>Сегодня</button>
+    <button type="button" id="nav-archive" onclick="switchView('archive')"><span class="nav-ico">🏆</span>Архив</button>
+    <button type="button" id="nav-manifest" onclick="switchView('manifest')"><span class="nav-ico">🧭</span>Манифест</button>
+    <button type="button" id="nav-backup" onclick="switchView('backup')"><span class="nav-ico">🛡</span>Бэкап</button>
+  </div>
+</nav>
 
-                <!-- Блок 1: 3 произвольные победы дня -->
-                <div class="paper-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between border-b border-hairline pb-2">
-                        <div class="flex items-center gap-2">
-                            <span>🏆</span>
-                            <h2 class="font-serif text-base font-bold text-espresso">3 победы дня</h2>
-                        </div>
-                        <span class="text-[11px] text-taupe">Любые твои действия</span>
-                    </div>
+<script>
+  const DEFAULT_DECL = `До февраля 2027 года я создаю и запускаю свой стабильный онлайн-доход, который позволяет мне зарабатывать с помощью компьютера из любой точки мира и свободно владеть английским языком.
 
-                    <div class="flex items-center gap-2.5">
-                        <span id="win-dot-1" class="w-6 h-6 rounded-full bg-warmSand text-taupe text-xs font-bold flex items-center justify-center shrink-0 transition-colors">1</span>
-                        <input id="ev-win-1" type="text" oninput="updateWinDot(1)" placeholder="Первая победа сегодня..." class="w-full rounded-xl bg-ivory border border-hairline px-3 py-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta">
-                    </div>
+Взамен я отдаю миру свои лучшие качества: абсолютную надежность, умение глубоко слышать людей, системное мышление и способность доводить сложные проекты до четкого результата. Я каждый день прокачиваю свои навыки, практикую английский и смело тестирую новые возможности.
 
-                    <div class="flex items-center gap-2.5">
-                        <span id="win-dot-2" class="w-6 h-6 rounded-full bg-warmSand text-taupe text-xs font-bold flex items-center justify-center shrink-0 transition-colors">2</span>
-                        <input id="ev-win-2" type="text" oninput="updateWinDot(2)" placeholder="Вторая победа сегодня..." class="w-full rounded-xl bg-ivory border border-hairline px-3 py-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta">
-                    </div>
+Я полностью выключаю старый сценарий сомнений и тяжелой борьбы. Мне не нужно надрываться, чтобы заслужить право на хорошую жизнь — я достоин свободы, достатка и успеха по праву рождения. Моя вера в себя растет с каждым конкретным действием. Я уже вижу и чувствую этот результат, и сегодня я делаю уверенный, легкий шаг ему навстречу.`;
 
-                    <div class="flex items-center gap-2.5">
-                        <span id="win-dot-3" class="w-6 h-6 rounded-full bg-warmSand text-taupe text-xs font-bold flex items-center justify-center shrink-0 transition-colors">3</span>
-                        <input id="ev-win-3" type="text" oninput="updateWinDot(3)" placeholder="Третья победа сегодня..." class="w-full rounded-xl bg-ivory border border-hairline px-3 py-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta">
-                    </div>
-                </div>
+  const DEFAULT_SLIDE = `Я просыпаюсь утром в своем светлом, уютном доме с ощущением полной свободы и спокойной радости. Рядом моя любимая жена, в доме слышен смех наших двоих детей и бегает наша собака. Мне никуда не нужно спешить по будильнику.
 
-                <!-- Блок 2: Практика английского -->
-                <div class="paper-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span>🇬🇧</span>
-                            <div>
-                                <h2 class="font-serif text-base font-bold text-espresso">Практика английского</h2>
-                                <p class="text-[11px] text-taupe">Каждый день приближает свободу</p>
-                            </div>
-                        </div>
-                        <!-- Переключатель -->
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input id="ev-english-toggle" type="checkbox" class="sr-only peer" onchange="toggleEnglishInput()">
-                            <div class="w-11 h-6 bg-warmSand peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-hairline after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sage"></div>
-                        </label>
-                    </div>
-                    <input id="ev-english-note" type="text" placeholder="Что именно делал? Например: подкаст, новые слова, разговор..." class="w-full rounded-xl bg-ivory border border-hairline px-3 py-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-sage">
-                </div>
+Я работаю с компьютера 3–4 часа в день в удовольствие, создавая ценные проекты из любой точки мира. У нас есть финансовая свобода: мы в любой момент можем спонтанно купить билеты и улететь в другую страну на несколько недель всей семьей. Я в отличной физической форме, регулярно тренируюсь, питаюсь качественной едой и с гордостью и легкостью помогаю маме финансово.
 
-                <!-- Блок 3: Благодарность -->
-                <div class="paper-card rounded-2xl p-4 space-y-3.5">
-                    <div class="flex items-center gap-2 border-b border-hairline pb-2">
-                        <span>🙏</span>
-                        <h2 class="font-serif text-base font-bold text-espresso">Благодарность</h2>
-                    </div>
+Внутри меня — уверенность, легкость и азарт. Душа и разум едины. Мой мир заботится обо мне, и я просто позволяю себе жить этой жизнью.`;
 
-                    <div class="space-y-1">
-                        <label class="block text-xs font-medium text-taupe">За что я благодарен сегодня (что есть)</label>
-                        <textarea id="ev-gratitude-have" rows="2" placeholder="Здоровье, люди, возможности, моменты дня..." class="w-full rounded-xl bg-ivory border border-hairline p-3 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta resize-none"></textarea>
-                    </div>
+  const DEFAULT_FLASHES = [
+    "Старый фильм о том, что всё дается тяжелым трудом и я чего-то недостоин, окончен. Я выбираю другой кадр: уверенность, легкость и азарт.",
+    "У меня уже есть всё, чтобы зарабатывать онлайн: голова, характер, надежность и умение вести проекты. Мне нужно просто действовать без страха.",
+    "Я снижаю важность. Мне не нужно контролировать всё на свете — я делаю свой шаг сегодня, а мир сам выстраивает нужные двери.",
+    "Каждый мой урок английского и каждый шаг в проектах — это кирпичик в фундамент моего дома, моей свободы и благополучия моей семьи.",
+    "Я достоин лучшего просто потому, что я есть. Душа и разум едины."
+  ];
 
-                    <div class="space-y-1">
-                        <label class="block text-xs font-medium text-taupe">За что благодарен из того, чего пока нет</label>
-                        <textarea id="ev-gratitude-not" rows="2" placeholder="Как за пространство для роста, защиту и закалку характера..." class="w-full rounded-xl bg-ivory border border-hairline p-3 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta resize-none"></textarea>
-                    </div>
-                </div>
+  const STORAGE_KEY = 'mesto_sily_v3';
 
-                <!-- Блок 4: Состояние и Подсознание (Хилл + Зеланд) -->
-                <div class="paper-card rounded-2xl p-4 space-y-4">
-                    <div class="flex items-center gap-2 border-b border-hairline pb-2">
-                        <span>🧠</span>
-                        <h2 class="font-serif text-base font-bold text-espresso">Состояние и Подсознание</h2>
-                    </div>
+  function getTodayKey() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
 
-                    <!-- Шкала 1: Вера (Хилл) -->
-                    <div class="space-y-1.5">
-                        <div class="flex justify-between items-center">
-                            <label class="text-xs font-semibold text-espresso">Уровень веры в себя (Н. Хилл)</label>
-                            <span id="faith-val-badge" class="text-xs font-bold text-terracotta bg-terracotta/10 px-2 py-0.5 rounded-md">8 / 10</span>
-                        </div>
-                        <input id="ev-faith-slider" type="range" min="1" max="10" value="8" oninput="document.getElementById('faith-val-badge').textContent = this.value + ' / 10'">
-                    </div>
+  function loadState() {
+    let st = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) st = JSON.parse(raw);
+    } catch (e) {}
 
-                    <!-- Шкала 2: Легкость / Снятие зажима (Зеланд) -->
-                    <div class="space-y-1.5">
-                        <div class="flex justify-between items-center">
-                            <label class="text-xs font-semibold text-espresso">Легкость / Без зажима (В. Зеланд)</label>
-                            <span id="ease-val-badge" class="text-xs font-bold text-sage bg-sageSoft px-2 py-0.5 rounded-md">7 / 10</span>
-                        </div>
-                        <input id="ev-ease-slider" class="sage-slider" type="range" min="1" max="10" value="7" oninput="document.getElementById('ease-val-badge').textContent = this.value + ' / 10'">
-                        <p class="text-[10px] text-taupe">10 = полное спокойствие и отсутствие избыточной важности</p>
-                    </div>
-
-                    <!-- Единство души и разума -->
-                    <div class="space-y-2">
-                        <label class="block text-xs font-semibold text-espresso">Единство души и разума</label>
-                        <div class="grid grid-cols-1 gap-1.5" id="unity-pills">
-                            <button type="button" onclick="selectUnity('Душа и разум едины')" data-unity="Душа и разум едины" class="unity-pill text-left px-3.5 py-2.5 rounded-xl border border-sage bg-sageSoft text-espresso text-xs font-semibold flex items-center justify-between">
-                                <span>✨ Душа и разум едины</span>
-                                <span class="check-mark text-sage">✓</span>
-                            </button>
-                            <button type="button" onclick="selectUnity('Есть легкое сомнение')" data-unity="Есть легкое сомнение" class="unity-pill text-left px-3.5 py-2.5 rounded-xl border border-hairline bg-ivory text-taupe text-xs font-medium flex items-center justify-between">
-                                <span>🌤 Есть легкое сомнение</span>
-                                <span class="check-mark hidden text-terracotta">✓</span>
-                            </button>
-                            <button type="button" onclick="selectUnity('Разум напряжен — пора выдохнуть')" data-unity="Разум напряжен — пора выдохнуть" class="unity-pill text-left px-3.5 py-2.5 rounded-xl border border-hairline bg-ivory text-taupe text-xs font-medium flex items-center justify-between">
-                                <span>🌊 Разум напряжен — пора выдохнуть</span>
-                                <span class="check-mark hidden text-terracotta">✓</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Доказательство подсознанию -->
-                    <div class="space-y-1">
-                        <label class="block text-xs font-semibold text-terracotta">
-                            Доказательство подсознанию: сегодня я подтвердил, что я человек, который...
-                        </label>
-                        <textarea id="ev-proof" rows="2" placeholder="...держит слово перед собой, учится каждый день и спокойно идет к своей свободе." class="w-full rounded-xl bg-ivory border border-hairline p-3 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta resize-none"></textarea>
-                    </div>
-                </div>
-
-                <!-- Блок 5: Сворачиваемая «Точка роста» -->
-                <div class="paper-card rounded-2xl overflow-hidden">
-                    <button type="button" onclick="toggleGrowthAccordion()" class="w-full p-4 flex items-center justify-between text-left bg-warmSand/45 hover:bg-warmSand/75 transition-colors">
-                        <div class="flex items-center gap-2">
-                            <span>🌱</span>
-                            <div>
-                                <h3 class="text-xs font-bold text-espresso">Точка роста (если было что-то неприятное)</h3>
-                                <p class="text-[11px] text-taupe">Извлечь урок, снизить важность и отпустить</p>
-                            </div>
-                        </div>
-                        <span id="growth-chevron" class="text-taupe text-xs font-bold transition-transform">▼</span>
-                    </button>
-
-                    <div id="growth-accordion-body" class="hidden p-4 space-y-3 border-t border-hairline bg-paper">
-                        <div class="space-y-1">
-                            <label class="block text-xs font-medium text-espresso">Какой урок или силу дала эта ситуация?</label>
-                            <textarea id="ev-growth-lesson" rows="2" placeholder="Любое событие работает на меня, если я так решил..." class="w-full rounded-xl bg-ivory border border-hairline p-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-sage resize-none"></textarea>
-                        </div>
-                        <div class="space-y-1">
-                            <label class="block text-xs font-medium text-espresso">Снижаю важность: что я отпускаю прямо сейчас?</label>
-                            <textarea id="ev-growth-release" rows="2" placeholder="Отпускаю контроль и напряжение, иду спать со спокойной головой..." class="w-full rounded-xl bg-ivory border border-hairline p-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-sage resize-none"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Блок 6: Главный фокус на завтра -->
-                <div class="paper-card rounded-2xl p-4 space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span>⚡</span>
-                        <h2 class="font-serif text-base font-bold text-espresso">Главный фокус на завтра</h2>
-                    </div>
-                    <p class="text-[11px] text-taupe">Эта фраза автоматически встретит тебя завтра утром на экране настроя</p>
-                    <input id="ev-tomorrow-focus" type="text" placeholder="Например: изучить 2 вакансии/проекта и сделать урок английского" class="w-full rounded-xl bg-ivory border border-hairline px-3 py-2.5 text-sm text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta">
-                </div>
-
-                <!-- Кнопка сохранения вечера -->
-                <div class="pt-1 pb-2">
-                    <button onclick="saveEveningEntry()" class="w-full py-4 px-5 rounded-2xl bg-espresso hover:bg-espresso/95 text-ivory font-semibold text-[15px] shadow-lg shadow-espresso/15 flex items-center justify-center gap-2 btn-tactile">
-                        <span>🌙 Зафиксировать вечер</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== ВКЛАДКА 2: АРХИВ ==================== -->
-        <section id="view-archive" class="hidden fade-in space-y-4">
-            <div>
-                <p class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Факты твоей силы</p>
-                <h2 class="font-serif text-2xl font-bold text-espresso">Архив побед</h2>
-            </div>
-
-            <!-- Генератор случайной победы -->
-            <div class="bg-espresso text-ivory rounded-2xl p-4 shadow-md space-y-3">
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-semibold uppercase tracking-wider text-terracotta">Напоминание подсознанию</span>
-                    <span>🏆</span>
-                </div>
-                <p id="archive-random-win" class="font-serif text-[15px] leading-relaxed text-ivory/95 min-h-[42px]">
-                    Нажми кнопку ниже, чтобы достать реальное доказательство того, что ты умеешь делать вещи и гордиться собой.
-                </p>
-                <button onclick="pickRandomArchiveWin()" class="w-full py-2.5 px-4 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-xs btn-tactile">
-                    Вспомнить свою силу
-                </button>
-            </div>
-
-            <!-- Поиск и фильтры -->
-            <div class="space-y-2">
-                <input id="archive-search" type="text" oninput="renderArchive()" placeholder="Поиск по победам, английскому или мыслям..." class="w-full rounded-xl bg-paper border border-hairline px-3.5 py-2.5 text-sm text-espresso placeholder:text-taupe/60 focus:outline-none focus:border-terracotta">
-
-                <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
-                    <button onclick="setArchiveFilter('all')" id="arch-flt-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-espresso text-ivory shrink-0">Все дни</button>
-                    <button onclick="setArchiveFilter('english')" id="arch-flt-english" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-paper border border-hairline text-taupe shrink-0">🇬🇧 С английским</button>
-                    <button onclick="setArchiveFilter('high')" id="arch-flt-high" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-paper border border-hairline text-taupe shrink-0">🔥 Вера 8+</button>
-                </div>
-            </div>
-
-            <!-- Список записей -->
-            <div id="archive-list" class="space-y-3"></div>
-        </section>
-
-        <!-- ==================== ВКЛАДКА 3: МАНИФЕСТ ==================== -->
-        <section id="view-manifest" class="hidden fade-in space-y-4">
-            <div>
-                <p class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Настраивается один раз</p>
-                <h2 class="font-serif text-2xl font-bold text-espresso">Мой Манифест</h2>
-            </div>
-
-            <p class="text-xs text-taupe leading-relaxed">
-                Твои персональные тексты уже вшиты сюда. Ты можешь в любой момент уточнить формулировки — они автоматически обновятся на утреннем экране.
-            </p>
-
-            <!-- Редактирование Декларации -->
-            <div class="paper-card rounded-2xl p-4 space-y-2">
-                <label class="block font-serif text-sm font-bold text-espresso">🔥 Моя Декларация Силы (по Н. Хиллу)</label>
-                <textarea id="edit-declaration" rows="7" class="w-full rounded-xl bg-ivory border border-hairline p-3 font-serif text-sm text-espresso leading-relaxed focus:outline-none focus:border-terracotta"></textarea>
-            </div>
-
-            <!-- Редактирование Целевого Слайда -->
-            <div class="paper-card rounded-2xl p-4 space-y-2">
-                <label class="block font-serif text-sm font-bold text-espresso">🌿 Мой Целевой Слайд (по В. Зеланду)</label>
-                <textarea id="edit-slide" rows="7" class="w-full rounded-xl bg-ivory border border-hairline p-3 font-serif italic text-sm text-espresso leading-relaxed focus:outline-none focus:border-sage"></textarea>
-            </div>
-
-            <!-- Слайды-вспышки -->
-            <div class="paper-card rounded-2xl p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                    <h3 class="font-serif text-sm font-bold text-espresso">✦ Слайды-вспышки для сброса маятника</h3>
-                    <span id="flashes-count" class="text-xs text-taupe">5 шт.</span>
-                </div>
-                <div id="manifest-flashes-list" class="space-y-2"></div>
-                <div class="flex gap-2 pt-1">
-                    <input id="new-flash-input" type="text" placeholder="Добавить короткий слайд-переключатель..." class="flex-1 rounded-xl bg-ivory border border-hairline px-3 py-2 text-xs text-espresso placeholder:text-taupe/50 focus:outline-none focus:border-terracotta">
-                    <button onclick="addSlideFlash()" class="px-3.5 py-2 rounded-xl bg-terracotta text-white text-xs font-semibold btn-tactile">+ Добавить</button>
-                </div>
-            </div>
-
-            <button onclick="saveManifestChanges()" class="w-full py-3.5 px-5 rounded-2xl bg-espresso text-ivory font-semibold text-sm btn-tactile">
-                Сохранить изменения в Манифесте
-            </button>
-        </section>
-
-        <!-- ==================== ВКЛАДКА 4: БЭКАП ==================== -->
-        <section id="view-backup" class="hidden fade-in space-y-4">
-            <div>
-                <p class="text-[11px] font-semibold uppercase tracking-wider text-taupe">Конфиденциальность</p>
-                <h2 class="font-serif text-2xl font-bold text-espresso">Приватность и Бэкап</h2>
-            </div>
-
-            <div class="bg-sageSoft border border-sage/25 rounded-2xl p-4 flex items-start gap-3">
-                <span class="text-xl mt-0.5">🔒</span>
-                <div>
-                    <h3 class="text-sm font-bold text-espresso">100% локально на твоем iPhone</h3>
-                    <p class="text-xs text-espresso/80 leading-relaxed mt-1">
-                        Ни один байт твоих записей не уходит в интернет. Все дневники, победы и манифест хранятся только в памяти твоего устройства.
-                    </p>
-                </div>
-            </div>
-    // Переменные таймера визуализации (60 сек) и Web Audio API
-    let timerSeconds = 60;
-    let timerInterval = null;
-    let isTimerRunning = false;
-    let soundMode = 'ambient'; // 'ambient' | 'ocean' | 'mute'
-    let audioCtx = null;
-    let activeAudioNodes = [];
-    let masterGainNode = null;
-
-    // ==================== ЗВУКОВОЙ ДВИЖОК (WEB AUDIO API) ====================
-    function setSoundMode(mode) {
-        soundMode = mode;
-        ['ambient', 'ocean', 'mute'].forEach(m => {
-            const btn = document.getElementById(`snd-${m}`);
-            if (m === mode) {
-                btn.className = 'py-1.5 px-2 rounded-xl border border-terracotta bg-terracotta/10 text-terracotta text-[11px] font-semibold truncate btn-tactile';
-            } else {
-                btn.className = 'py-1.5 px-2 rounded-xl border border-hairline bg-ivory text-taupe text-[11px] font-medium truncate btn-tactile';
-            }
-        });
-        if (isTimerRunning) {
-            stopAmbientAudio();
-            if (soundMode !== 'mute') startAmbientAudio();
-        }
+    if (!st || typeof st !== 'object') {
+      st = {
+        declaration: DEFAULT_DECL,
+        slide: DEFAULT_SLIDE,
+        flashes: DEFAULT_FLASHES.slice(),
+        nextFocus: "Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут.",
+        morningCompletedDate: "",
+        entries: [
+          {
+            id: "demo-1",
+            date: "2026-11-22",
+            wins: [
+              "Создал свое личное приложение «Место Силы» для работы с подсознанием",
+              "Провел тренировку на улице несмотря на прохладную погоду",
+              "Выделил время на чтение и осознанную настройку фокуса"
+            ],
+            engDone: true,
+            engNote: "Слушал и разбирал английскую речь, тренировал мышление на языке",
+            gratHave: "Благодарен за ясную голову, здоровье, опыт управления проектами и возможности в Берлине",
+            gratNotYet: "Благодарен за то, что мой онлайн-доход еще формируется — это дает мне азарт и рост",
+            faith: 8,
+            ease: 8,
+            align: "unity",
+            proof: "Сегодня я доказал себе, что умею не просто мечтать, а создавать реальные инструменты для своего роста",
+            nextFocus: "Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут."
+          }
+        ]
+      };
+      saveState(st);
     }
 
-    function startAmbientAudio() {
-        if (soundMode === 'mute') return;
-        try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!audioCtx) audioCtx = new AudioContext();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (!st.declaration || !st.declaration.trim()) st.declaration = DEFAULT_DECL;
+    if (!st.slide || !st.slide.trim()) st.slide = DEFAULT_SLIDE;
+    if (!Array.isArray(st.flashes) || !st.flashes.length) st.flashes = DEFAULT_FLASHES.slice();
+    if (!st.nextFocus) st.nextFocus = "Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут.";
+    if (!Array.isArray(st.entries)) st.entries = [];
+    return st;
+  }
 
-            stopAmbientAudio();
+  function saveState(st) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(st)); } catch (e) {}
+  }
 
-            const now = audioCtx.currentTime;
-            masterGainNode = audioCtx.createGain();
-            masterGainNode.gain.setValueAtTime(0.001, now);
-            masterGainNode.gain.exponentialRampToValueAtTime(0.18, now + 2.5);
-            masterGainNode.connect(audioCtx.destination);
+  let state = loadState();
+  let currentAlign = 'unity';
 
-            if (soundMode === 'ambient') {
-                // Теплый аккорд Dmaj9 на основе A=432 Гц (D3, A3, F#4, C#5, E5)
-                const freqs = [144.0, 216.0, 362.8, 543.6, 648.0];
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(620, now);
-                filter.connect(masterGainNode);
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
 
-                // Медленное дыхание (LFO)
-                const lfo = audioCtx.createOscillator();
-                const lfoGain = audioCtx.createGain();
-                lfo.frequency.setValueAtTime(0.12, now);
-                lfoGain.gain.setValueAtTime(180, now);
-                lfo.connect(lfoGain);
-                lfoGain.connect(filter.frequency);
-                lfo.start();
-                activeAudioNodes.push(lfo);
+  function generatePngIcon() {
+    try {
+      const c = document.createElement('canvas');
+      c.width = 180; c.height = 180;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#241F1A';
+      ctx.fillRect(0, 0, 180, 180);
+      ctx.strokeStyle = '#D89A5B';
+      ctx.lineWidth = 6;
+      ctx.beginPath(); ctx.arc(90, 90, 52, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = '#D89A5B';
+      ctx.beginPath(); ctx.arc(90, 90, 20, 0, Math.PI * 2); ctx.fill();
+      for (let i = 0; i < 8; i++) {
+        const a = (Math.PI / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(90 + Math.cos(a)*62, 90 + Math.sin(a)*62);
+        ctx.lineTo(90 + Math.cos(a)*76, 90 + Math.sin(a)*76);
+        ctx.stroke();
+      }
+      document.getElementById('appleIcon').href = c.toDataURL('image/png');
+    } catch (e) {}
+  }
 
-                freqs.forEach((f, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const oscGain = audioCtx.createGain();
-                    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-                    osc.frequency.setValueAtTime(f, now);
-                    osc.detune.setValueAtTime((idx - 2) * 3, now);
-                    oscGain.gain.setValueAtTime(0.16 / freqs.length, now);
-                    osc.connect(oscGain);
-                    oscGain.connect(filter);
-                    osc.start();
-                    activeAudioNodes.push(osc);
-                });
-            } else if (soundMode === 'ocean') {
-                // Мягкий розовый шум океана с волновым фильтром
-                const bufferSize = audioCtx.sampleRate * 4;
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const output = buffer.getChannelData(0);
-                let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-                for (let i = 0; i < bufferSize; i++) {
-                    const white = Math.random() * 2 - 1;
-                    b0 = 0.99886 * b0 + white * 0.0555179;
-                    b1 = 0.99332 * b1 + white * 0.0750759;
-                    b2 = 0.96900 * b2 + white * 0.1538520;
-                    b3 = 0.86650 * b3 + white * 0.3104856;
-                    b4 = 0.55000 * b4 + white * 0.5329522;
-                    b5 = -0.7616 * b5 - white * 0.0168980;
-                    output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
-                    b6 = white * 0.115926;
-                }
+  function renderAll() {
+    const now = new Date();
+    const opts = { weekday: 'long', day: 'numeric', month: 'long' };
+    document.getElementById('todayDate').textContent = now.toLocaleDateString('ru-RU', opts).toUpperCase();
 
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
-                noise.loop = true;
+    document.getElementById('morningFocusText').textContent = state.nextFocus;
+    document.getElementById('morningDeclText').textContent = state.declaration;
+    document.getElementById('morningSlideText').textContent = state.slide;
 
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(380, now);
+    document.getElementById('editDecl').value = state.declaration;
+    document.getElementById('editSlide').value = state.slide;
+    document.getElementById('editFlashes').value = state.flashes.join('\n');
 
-                const waveLfo = audioCtx.createOscillator();
-                const waveGain = audioCtx.createGain();
-                waveLfo.frequency.setValueAtTime(0.09, now); // ~11 сек цикл волны
-                waveGain.gain.setValueAtTime(220, now);
-                waveLfo.connect(waveGain);
-                waveGain.connect(filter.frequency);
+    const totalWins = state.entries.reduce((acc, e) => acc + (e.wins ? e.wins.length : 0), 0);
+    const totalEng = state.entries.filter(e => e.engDone).length;
+    document.getElementById('stDays').textContent = state.entries.length;
+    document.getElementById('stWins').textContent = totalWins;
+    document.getElementById('stEng').textContent = totalEng;
 
-                noise.connect(filter);
-                filter.connect(masterGainNode);
-
-                noise.start();
-                waveLfo.start();
-                activeAudioNodes.push(noise, waveLfo);
-            }
-        } catch (e) {
-            console.warn('Audio init skipped:', e);
-        }
+    const btn = document.getElementById('mornDoneBtn');
+    if (state.morningCompletedDate === getTodayKey()) {
+      btn.textContent = '✓ Утро сегодня засчитано • Отличный старт';
+      btn.classList.add('done');
+    } else {
+      btn.textContent = '☀️ Я в фокусе • Утро засчитано';
+      btn.classList.remove('done');
     }
 
-    function stopAmbientAudio() {
-        try {
-            if (masterGainNode && audioCtx) {
-                const now = audioCtx.currentTime;
-                masterGainNode.gain.cancelScheduledValues(now);
-                masterGainNode.gain.setValueAtTime(Math.max(masterGainNode.gain.value, 0.001), now);
-                masterGainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
-            }
-            const nodesToStop = [...activeAudioNodes];
-            activeAudioNodes = [];
-            setTimeout(() => {
-                nodesToStop.forEach(n => {
-                    try { n.stop(); n.disconnect(); } catch (_) {}
-                });
-            }, 650);
-        } catch (_) {}
+    const todayEntry = state.entries.find(e => e.date === getTodayKey());
+    if (todayEntry) {
+      document.getElementById('win1').value = todayEntry.wins[0] || '';
+      document.getElementById('win2').value = todayEntry.wins[1] || '';
+      document.getElementById('win3').value = todayEntry.wins[2] || '';
+      document.getElementById('engDone').checked = !!todayEntry.engDone;
+      document.getElementById('engNote').value = todayEntry.engNote || '';
+      document.getElementById('gratHave').value = todayEntry.gratHave || '';
+      document.getElementById('gratNotYet').value = todayEntry.gratNotYet || '';
+      document.getElementById('faithRange').value = todayEntry.faith || 8;
+      document.getElementById('faithVal').textContent = todayEntry.faith || 8;
+      document.getElementById('easeRange').value = todayEntry.ease || 8;
+      document.getElementById('easeVal').textContent = todayEntry.ease || 8;
+      setAlign(todayEntry.align || 'unity');
+      document.getElementById('proofText').value = todayEntry.proof || '';
+      document.getElementById('nextFocusInput').value = todayEntry.nextFocus || '';
     }
 
-    function playCompletionBowl() {
-        if (soundMode === 'mute') return;
-        try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!audioCtx) audioCtx = new AudioContext();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+    renderArchive();
+  }
 
-            const now = audioCtx.currentTime;
-            // Резонансный удар тибетской поющей чаши (432 Гц + обертон)
-            [432, 864 * 1.003].forEach((freq, i) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, now);
+  function switchView(name) {
+    document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav button').forEach(el => el.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+    window.scrollTo(0, 0);
+  }
 
-                gain.gain.setValueAtTime(0.001, now);
-                gain.gain.linearRampToValueAtTime(i === 0 ? 0.22 : 0.07, now + 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+  function switchSubMode(mode) {
+    const isMorn = mode === 'morning';
+    document.getElementById('sub-morning').style.display = isMorn ? 'block' : 'none';
+    document.getElementById('sub-evening').style.display = isMorn ? 'none' : 'block';
+    document.getElementById('tabMornBtn').classList.toggle('active', isMorn);
+    document.getElementById('tabEveBtn').classList.toggle('active', !isMorn);
+  }
 
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start(now);
-                osc.stop(now + 4.3);
-            });
-        } catch (_) {}
+  function completeMorning() {
+    state.morningCompletedDate = getTodayKey();
+    saveState(state);
+    renderAll();
+    showToast('Утренний настрой зафиксирован!');
+  }
+
+  function setAlign(val) {
+    currentAlign = val;
+    document.getElementById('al-unity').classList.toggle('active', val === 'unity');
+    document.getElementById('al-tension').classList.toggle('active', val === 'tension');
+  }
+
+  function toggleGrowth() {
+    const box = document.getElementById('growthBox');
+    const open = box.style.display === 'none';
+    box.style.display = open ? 'block' : 'none';
+    document.getElementById('growthArrow').textContent = open ? '▴' : '▾';
+  }
+
+  function saveEvening() {
+    const wins = [
+      document.getElementById('win1').value.trim(),
+      document.getElementById('win2').value.trim(),
+      document.getElementById('win3').value.trim()
+    ].filter(Boolean);
+
+    if (wins.length === 0) {
+      showToast('Запиши хотя бы 1 победу дня');
+      return;
     }
 
-    // ==================== ИНИЦИАЛИЗАЦИЯ ====================
-    function init() {
-        try {
-            const rawEntries = localStorage.getItem(KEY_ENTRIES);
-            entries = rawEntries ? JSON.parse(rawEntries) : [...SAMPLE_ENTRIES];
-
-            const rawManifest = localStorage.getItem(KEY_MANIFEST);
-            manifest = rawManifest ? JSON.parse(rawManifest) : JSON.parse(JSON.stringify(INITIAL_MANIFEST));
-
-            const rawMorning = localStorage.getItem(KEY_MORNING_DONE);
-            morningDoneMap = rawMorning ? JSON.parse(rawMorning) : {};
-        } catch (err) {
-            entries = [...SAMPLE_ENTRIES];
-            manifest = JSON.parse(JSON.stringify(INITIAL_MANIFEST));
-            morningDoneMap = {};
-        }
-
-        const todayISO = getDateISO(0);
-        document.getElementById('header-date').textContent = formatHumanDate(todayISO);
-
-        renderMorningScreen();
-        loadTodayEveningForm();
-        updateStats();
-        renderManifestEditor();
-        renderArchive();
-    }
-
-    // ==================== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК И РЕЖИМОВ ====================
-    function switchTab(tab) {
-        ['today', 'archive', 'manifest', 'backup'].forEach(t => {
-            const sec = document.getElementById(`view-${t}`);
-            const nav = document.getElementById(`nav-${t}`);
-            if (t === tab) {
-                sec.classList.remove('hidden');
-                nav.classList.remove('text-taupe');
-                nav.classList.add('text-terracotta');
-                nav.querySelector('span').classList.replace('font-medium', 'font-bold');
-            } else {
-                sec.classList.add('hidden');
-                nav.classList.add('text-taupe');
-                nav.classList.remove('text-terracotta');
-                nav.querySelector('span').classList.replace('font-bold', 'font-medium');
-            }
-        });
-        document.getElementById('main-scroll').scrollTo({ top: 0, behavior: 'smooth' });
-        if (tab === 'archive') renderArchive();
-    }
-
-    function setTodayMode(mode) {
-        const mView = document.getElementById('today-morning-view');
-        const eView = document.getElementById('today-evening-view');
-        const mBtn = document.getElementById('btn-mode-morning');
-        const eBtn = document.getElementById('btn-mode-evening');
-
-        if (mode === 'morning') {
-            mView.classList.remove('hidden');
-            eView.classList.add('hidden');
-            mBtn.className = 'py-2.5 px-3 rounded-xl bg-paper text-espresso font-semibold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all';
-            eBtn.className = 'py-2.5 px-3 rounded-xl text-taupe font-medium text-xs flex items-center justify-center gap-1.5 transition-all';
-        } else {
-            eView.classList.remove('hidden');
-            mView.classList.add('hidden');
-            eBtn.className = 'py-2.5 px-3 rounded-xl bg-paper text-espresso font-semibold text-xs shadow-xs flex items-center justify-center gap-1.5 transition-all';
-            mBtn.className = 'py-2.5 px-3 rounded-xl text-taupe font-medium text-xs flex items-center justify-center gap-1.5 transition-all';
-        }
-    }
-
-    // ==================== УТРЕННИЙ ЭКРАН И ТАЙМЕР ====================
-    function renderMorningScreen() {
-        // Форматирование параграфов Декларации и Слайда
-        const declEl = document.getElementById('morning-declaration-text');
-        declEl.innerHTML = (manifest.declaration || INITIAL_MANIFEST.declaration)
-            .split('\n\n')
-            .map(p => `<p>${escapeHtml(p.trim())}</p>`)
-            .join('');
-
-        const slideEl = document.getElementById('morning-slide-text');
-        slideEl.innerHTML = (manifest.targetSlide || INITIAL_MANIFEST.targetSlide)
-            .split('\n\n')
-            .map(p => `<p>${escapeHtml(p.trim())}</p>`)
-            .join('');
-
-        // Подтягиваем фокус из последней прошлой записи
-        const todayISO = getDateISO(0);
-        const pastEntries = entries
-            .filter(e => e.date < todayISO && e.tomorrowFocus && e.tomorrowFocus.trim())
-            .sort((a, b) => b.date.localeCompare(a.date));
-
-        const focusText = pastEntries.length > 0
-            ? pastEntries[0].tomorrowFocus
-            : "Сделать 1 конкретный шаг к онлайн-доходу и позаниматься английским 20 минут.";
-        document.getElementById('morning-today-focus').textContent = focusText;
-
-        // Состояние кнопки завершения утра
-        updateMorningCompleteButton();
-    }
-
-    function updateMorningCompleteButton() {
-        const todayISO = getDateISO(0);
-        const btn = document.getElementById('btn-complete-morning');
-        if (morningDoneMap[todayISO]) {
-            btn.className = 'w-full py-4 px-5 rounded-2xl bg-sage text-white font-semibold text-[15px] shadow-md flex items-center justify-center gap-2 btn-tactile';
-            btn.innerHTML = '<span>✓ Утренний настрой выполнен • Я в фокусе</span>';
-        } else {
-            btn.className = 'w-full py-4 px-5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-[15px] shadow-lg shadow-terracotta/20 flex items-center justify-center gap-2 btn-tactile';
-            btn.innerHTML = '<span>☀️ Я в фокусе • Утро засчитано</span>';
-        }
-    }
-
-    function toggleMorningComplete() {
-        const todayISO = getDateISO(0);
-        morningDoneMap[todayISO] = !morningDoneMap[todayISO];
-        localStorage.setItem(KEY_MORNING_DONE, JSON.stringify(morningDoneMap));
-        updateMorningCompleteButton();
-        if (morningDoneMap[todayISO]) {
-            showToast('Утренний настрой зафиксирован. Уверенность, легкость и азарт!', '☀️');
-        }
-    }
-
-    function toggleVisualizationTimer() {
-        if (isTimerRunning) {
-            clearInterval(timerInterval);
-            isTimerRunning = false;
-            stopAmbientAudio();
-            document.getElementById('timer-btn-icon').textContent = '▶';
-            document.getElementById('timer-btn-label').textContent = 'Продолжить';
-        } else {
-            if (timerSeconds <= 0) timerSeconds = 60;
-            isTimerRunning = true;
-            startAmbientAudio();
-            document.getElementById('timer-btn-icon').textContent = '⏸';
-            document.getElementById('timer-btn-label').textContent = 'Пауза';
-
-            timerInterval = setInterval(() => {
-                timerSeconds--;
-                updateTimerUI();
-                if (timerSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    isTimerRunning = false;
-                    stopAmbientAudio();
-                    playCompletionBowl();
-                    document.getElementById('timer-btn-icon').textContent = '↻';
-                    document.getElementById('timer-btn-label').textContent = 'Повторить 60 сек';
-                    showToast('Визуализация завершена. Слайд закреплен в подсознании.', '🌿');
-                }
-            }, 1000);
-        }
-    }
-
-    function resetVisualizationTimer() {
-        clearInterval(timerInterval);
-        isTimerRunning = false;
-        stopAmbientAudio();
-        timerSeconds = 60;
-        updateTimerUI();
-        document.getElementById('timer-btn-icon').textContent = '▶';
-        document.getElementById('timer-btn-label').textContent = 'Запустить 60 сек';
-    }
-
-    function updateTimerUI() {
-        const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
-        const secs = String(timerSeconds % 60).padStart(2, '0');
-        document.getElementById('timer-display').textContent = `${mins}:${secs}`;
-        const pct = (timerSeconds / 60) * 100;
-        document.getElementById('timer-progress-bar').style.width = `${pct}%`;
-    }
-
-    // ==================== ВЕЧЕРНЯЯ ФОРМА ====================
-    function loadTodayEveningForm() {
-        const todayISO = getDateISO(0);
-        const existing = entries.find(e => e.date === todayISO);
-        if (!existing) return;
-
-        document.getElementById('ev-win-1').value = existing.wins[0] || '';
-        document.getElementById('ev-win-2').value = existing.wins[1] || '';
-        document.getElementById('ev-win-3').value = existing.wins[2] || '';
-        [1, 2, 3].forEach(updateWinDot);
-
-        document.getElementById('ev-english-toggle').checked = !!existing.englishDone;
-        document.getElementById('ev-english-note').value = existing.englishNote || '';
-
-        document.getElementById('ev-gratitude-have').value = existing.gratitudeHave || '';
-        document.getElementById('ev-gratitude-not').value = existing.gratitudeNot || '';
-
-        document.getElementById('ev-faith-slider').value = existing.faith || 8;
-        document.getElementById('faith-val-badge').textContent = `${existing.faith || 8} / 10`;
-
-        document.getElementById('ev-ease-slider').value = existing.ease || 7;
-        document.getElementById('ease-val-badge').textContent = `${existing.ease || 7} / 10`;
-
-        if (existing.unity) selectUnity(existing.unity);
-
-        document.getElementById('ev-proof').value = existing.proof || '';
-        document.getElementById('ev-growth-lesson').value = existing.growthLesson || '';
-        document.getElementById('ev-growth-release').value = existing.growthRelease || '';
-        document.getElementById('ev-tomorrow-focus').value = existing.tomorrowFocus || '';
-    }
-
-    function updateWinDot(num) {
-        const val = document.getElementById(`ev-win-${num}`).value.trim();
-        const dot = document.getElementById(`win-dot-${num}`);
-        if (val.length > 0) {
-            dot.className = 'w-6 h-6 rounded-full bg-sage text-white text-xs font-bold flex items-center justify-center shrink-0 transition-colors';
-            dot.textContent = '✓';
-        } else {
-            dot.className = 'w-6 h-6 rounded-full bg-warmSand text-taupe text-xs font-bold flex items-center justify-center shrink-0 transition-colors';
-            dot.textContent = num;
-        }
-    }
-
-    function toggleEnglishInput() {
-        const checked = document.getElementById('ev-english-toggle').checked;
-        if (checked) {
-            document.getElementById('ev-english-note').focus();
-        }
-    }
-
-    function selectUnity(label) {
-        selectedUnity = label;
-        document.querySelectorAll('.unity-pill').forEach(btn => {
-            const isMatch = btn.dataset.unity === label;
-            const check = btn.querySelector('.check-mark');
-            if (isMatch) {
-                btn.className = 'unity-pill text-left px-3.5 py-2.5 rounded-xl border border-sage bg-sageSoft text-espresso text-xs font-semibold flex items-center justify-between';
-                check.classList.remove('hidden');
-            } else {
-                btn.className = 'unity-pill text-left px-3.5 py-2.5 rounded-xl border border-hairline bg-ivory text-taupe text-xs font-medium flex items-center justify-between';
-                check.classList.add('hidden');
-            }
-        });
-    }
-
-    function toggleGrowthAccordion() {
-        const body = document.getElementById('growth-accordion-body');
-        const chev = document.getElementById('growth-chevron');
-        const isHidden = body.classList.contains('hidden');
-        if (isHidden) {
-            body.classList.remove('hidden');
-            chev.style.transform = 'rotate(180deg)';
-        } else {
-            body.classList.add('hidden');
-            chev.style.transform = 'rotate(0deg)';
-        }
-    }
-
-    function saveEveningEntry() {
-        const todayISO = getDateISO(0);
-        const wins = [
-            document.getElementById('ev-win-1').value.trim(),
-            document.getElementById('ev-win-2').value.trim(),
-            document.getElementById('ev-win-3').value.trim()
-        ].filter(Boolean);
-
-        const englishDone = document.getElementById('ev-english-toggle').checked;
-        const englishNote = document.getElementById('ev-english-note').value.trim();
-        const gratitudeHave = document.getElementById('ev-gratitude-have').value.trim();
-        const gratitudeNot = document.getElementById('ev-gratitude-not').value.trim();
-        const faith = Number(document.getElementById('ev-faith-slider').value);
-        const ease = Number(document.getElementById('ev-ease-slider').value);
-        const proof = document.getElementById('ev-proof').value.trim();
-        const growthLesson = document.getElementById('ev-growth-lesson').value.trim();
-        const growthRelease = document.getElementById('ev-growth-release').value.trim();
-        const tomorrowFocus = document.getElementById('ev-tomorrow-focus').value.trim();
-
-        if (wins.length === 0 && !gratitudeHave && !proof) {
-            showToast('Запиши хотя бы одну победу или благодарность за сегодня', '✍️');
-            return;
-        }
-
-        const record = {
-            date: todayISO,
-            wins,
-            englishDone,
-            englishNote,
-            gratitudeHave,
-            gratitudeNot,
-            faith,
-            ease,
-            unity: selectedUnity,
-            proof,
-            growthLesson,
-            growthRelease,
-            tomorrowFocus
-        };
-
-        const idx = entries.findIndex(e => e.date === todayISO);
-        if (idx >= 0) entries[idx] = record;
-        else entries.unshift(record);
-
-        localStorage.setItem(KEY_ENTRIES, JSON.stringify(entries));
-        updateStats();
-        renderArchive();
-        showToast('Вечер зафиксирован. Ты стал еще сильнее!', '🌙');
-    }
-
-    function updateStats() {
-        let winsCount = 0;
-        let englishDays = 0;
-        entries.forEach(e => {
-            winsCount += (e.wins || []).filter(Boolean).length;
-            if (e.englishDone) englishDays++;
-        });
-
-        // Расчет серии дней подряд
-        const sortedDates = [...new Set(entries.map(e => e.date))].sort().reverse();
-        let streak = 0;
-        if (sortedDates.length > 0) {
-            const today = getDateISO(0);
-            const yesterday = getDateISO(1);
-            if (sortedDates[0] === today || sortedDates[0] === yesterday) {
-                streak = 1;
-                for (let i = 0; i < sortedDates.length - 1; i++) {
-                    const curr = new Date(sortedDates[i]);
-                    const prev = new Date(sortedDates[i + 1]);
-                    if (Math.round((curr - prev) / 86400000) === 1) streak++;
-                    else break;
-                }
-            }
-        }
-
-        document.getElementById('stat-streak').textContent = `${streak} дн.`;
-        document.getElementById('stat-wins').textContent = winsCount;
-        document.getElementById('stat-english').textContent = `${englishDays} дн.`;
-    }
-
-    // ==================== МОДАЛЬНОЕ ОКНО: СМЕНИТЬ СЛАЙД ====================
-    function openSlideSwitcher() {
-        renderModalFlash();
-        refreshModalVictory();
-        document.getElementById('slide-switcher-modal').classList.remove('hidden');
-    }
-
-    function closeSlideSwitcher() {
-        document.getElementById('slide-switcher-modal').classList.add('hidden');
-    }
-
-    function renderModalFlash() {
-        const list = manifest.flashes && manifest.flashes.length ? manifest.flashes : INITIAL_MANIFEST.flashes;
-        const text = list[currentFlashIdx % list.length];
-        document.getElementById('modal-flash-text').textContent = `«${text}»`;
-    }
-
-    function nextSlideFlash() {
-        const list = manifest.flashes && manifest.flashes.length ? manifest.flashes : INITIAL_MANIFEST.flashes;
-        currentFlashIdx = (currentFlashIdx + 1) % list.length;
-        renderModalFlash();
-    }
-
-    function refreshModalVictory() {
-        const allWins = [];
-        entries.forEach(e => {
-            (e.wins || []).forEach(w => {
-                if (w.trim()) allWins.push(`${w} (${formatHumanDate(e.date)})`);
-            });
-        });
-
-        const el = document.getElementById('modal-victory-text');
-        if (allWins.length === 0) {
-            el.textContent = "У тебя уже есть характер, надежность и опыт управления проектами. Запиши первую победу вечером!";
-        } else {
-            el.textContent = allWins[Math.floor(Math.random() * allWins.length)];
-        }
-    }
-
-    // ==================== АРХИВ ====================
-    function setArchiveFilter(flt) {
-        archiveFilter = flt;
-        ['all', 'english', 'high'].forEach(key => {
-            const btn = document.getElementById(`arch-flt-${key}`);
-            if (key === flt) {
-                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-espresso text-ivory shrink-0';
-            } else {
-                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium bg-paper border border-hairline text-taupe shrink-0';
-            }
-        });
-        renderArchive();
-    }
-
-    function pickRandomArchiveWin() {
-        const pool = [];
-        entries.forEach(e => {
-            (e.wins || []).forEach(w => {
-                if (w.trim()) pool.push({ title: formatHumanDate(e.date), text: `Победа: «${w}»` });
-            });
-            if (e.proof && e.proof.trim()) {
-                pool.push({ title: formatHumanDate(e.date), text: `Доказательство: «Я человек, который ${e.proof}»` });
-            }
-        });
-
-        const box = document.getElementById('archive-random-win');
-        if (pool.length === 0) {
-            box.textContent = "Архив пока пуст. Зафиксируй свои первые победы на вкладке «Сегодня»!";
-            return;
-        }
-        const item = pool[Math.floor(Math.random() * pool.length)];
-        box.innerHTML = `<span class="block text-[11px] font-sans text-terracotta mb-1">${item.title}</span>${escapeHtml(item.text)}`;
-    }
-
-    function renderArchive() {
-        const listEl = document.getElementById('archive-list');
-        const q = (document.getElementById('archive-search').value || '').toLowerCase().trim();
-
-        const filtered = entries.filter(e => {
-            if (archiveFilter === 'english' && !e.englishDone) return false;
-            if (archiveFilter === 'high' && (e.faith || 0) < 8) return false;
-            if (!q) return true;
-            const textBlob = [
-                ...(e.wins || []),
-                e.englishNote, e.gratitudeHave, e.gratitudeNot,
-                e.proof, e.tomorrowFocus
-            ].join(' ').toLowerCase();
-            return textBlob.includes(q);
-        });
-
-        if (filtered.length === 0) {
-            listEl.innerHTML = `
-                <div class="paper-card rounded-2xl p-6 text-center space-y-1.5">
-                    <p class="font-serif text-base font-bold text-espresso">Записей пока нет</p>
-                    <p class="text-xs text-taupe">Заполни «Итоги вечера» на вкладке «Сегодня», и здесь появится твоя история побед.</p>
-                </div>
-            `;
-            return;
-        }
-
-        listEl.innerHTML = filtered.map((item, idx) => {
-            const winsHtml = (item.wins || []).map(w => `
-                <li class="flex items-start gap-2 text-xs text-espresso">
-                    <span class="text-sage font-bold mt-0.5">✓</span>
-                    <span>${escapeHtml(w)}</span>
-                </li>
-            `).join('');
-
-            return `
-                <article class="paper-card rounded-2xl p-4 space-y-3">
-                    <div class="flex items-center justify-between border-b border-hairline pb-2">
-                        <div>
-                            <h3 class="font-serif text-sm font-bold text-espresso">${formatHumanDate(item.date)}</h3>
-                            <div class="flex items-center gap-2 mt-0.5">
-                                <span class="text-[11px] text-taupe">${item.unity || 'Душа и разум едины'}</span>
-                                ${item.englishDone ? '<span class="text-[10px] font-semibold bg-sageSoft text-sage px-1.5 py-0.5 rounded">🇬🇧 English</span>' : ''}
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <span class="block text-[11px] font-bold text-terracotta">Вера ${item.faith}/10</span>
-                            <span class="block text-[10px] text-sage">Легкость ${item.ease}/10</span>
-                        </div>
-                    </div>
-
-                    ${winsHtml ? `<ul class="space-y-1.5">${winsHtml}</ul>` : ''}
-
-                    ${item.proof ? `
-                        <div class="bg-ivory rounded-xl p-3 border border-hairline/80">
-                            <p class="text-[10px] font-semibold uppercase tracking-wider text-terracotta mb-0.5">Доказательство подсознанию</p>
-                            <p class="text-xs text-espresso italic leading-relaxed">«Я человек, который ${escapeHtml(item.proof)}»</p>
-                        </div>
-                    ` : ''}
-
-                    <div id="arch-extra-${idx}" class="hidden space-y-2 pt-2 border-t border-hairline/70 text-xs">
-                        ${item.englishNote ? `<p><strong class="text-sage">English:</strong> ${escapeHtml(item.englishNote)}</p>` : ''}
-                        ${item.gratitudeHave ? `<p><strong class="text-taupe">Благодарность:</strong> ${escapeHtml(item.gratitudeHave)}</p>` : ''}
-                        ${item.gratitudeNot ? `<p><strong class="text-taupe">За то, чего пока нет:</strong> ${escapeHtml(item.gratitudeNot)}</p>` : ''}
-                        ${item.growthLesson ? `<p><strong class="text-espresso">Урок точки роста:</strong> ${escapeHtml(item.growthLesson)}</p>` : ''}
-                        ${item.tomorrowFocus ? `<p><strong class="text-terracotta">Фокус на следующий день:</strong> ${escapeHtml(item.tomorrowFocus)}</p>` : ''}
-                    </div>
-
-                    <button onclick="toggleArchExtra(${idx}, this)" class="text-[11px] font-medium text-taupe hover:text-espresso">
-                        Показать детали дня ↓
-                    </button>
-                </article>
-            `;
-        }).join('');
-    }
-
-    function toggleArchExtra(idx, btn) {
-        const el = document.getElementById(`arch-extra-${idx}`);
-        const hidden = el.classList.contains('hidden');
-        if (hidden) {
-            el.classList.remove('hidden');
-            btn.textContent = 'Свернуть детали ↑';
-        } else {
-            el.classList.add('hidden');
-            btn.textContent = 'Показать детали дня ↓';
-        }
-    }
-
-    // ==================== МАНИФЕСТ ====================
-    function renderManifestEditor() {
-        document.getElementById('edit-declaration').value = manifest.declaration || INITIAL_MANIFEST.declaration;
-        document.getElementById('edit-slide').value = manifest.targetSlide || INITIAL_MANIFEST.targetSlide;
-
-        const flashes = manifest.flashes || INITIAL_MANIFEST.flashes;
-        document.getElementById('flashes-count').textContent = `${flashes.length} шт.`;
-        document.getElementById('manifest-flashes-list').innerHTML = flashes.map((f, i) => `
-            <div class="flex items-start justify-between gap-2 bg-ivory rounded-xl p-2.5 border border-hairline">
-                <p class="text-xs text-espresso leading-relaxed">«${escapeHtml(f)}»</p>
-                <button onclick="removeSlideFlash(${i})" class="text-taupe hover:text-red-600 text-xs p-1 shrink-0">✕</button>
-            </div>
-        `).join('');
-    }
-
-    function addSlideFlash() {
-        const inp = document.getElementById('new-flash-input');
-        const val = inp.value.trim();
-        if (!val) return;
-        if (!manifest.flashes) manifest.flashes = [];
-        manifest.flashes.push(val);
-        inp.value = '';
-        localStorage.setItem(KEY_MANIFEST, JSON.stringify(manifest));
-        renderManifestEditor();
-        showToast('Новый слайд-вспышка добавлен', '✦');
-    }
-
-    function removeSlideFlash(idx) {
-        if (manifest.flashes.length <= 1) {
-            showToast('Оставь хотя бы один слайд-переключатель', '💡');
-            return;
-        }
-        manifest.flashes.splice(idx, 1);
-        localStorage.setItem(KEY_MANIFEST, JSON.stringify(manifest));
-        renderManifestEditor();
-    }
-
-    function saveManifestChanges() {
-        manifest.declaration = document.getElementById('edit-declaration').value.trim();
-        manifest.targetSlide = document.getElementById('edit-slide').value.trim();
-        localStorage.setItem(KEY_MANIFEST, JSON.stringify(manifest));
-        renderMorningScreen();
-        showToast('Манифест обновлен и синхронизирован с утром', '🔥');
-    }
-
-    // ==================== БЭКАП И ОЧИСТКА ====================
-    function exportJsonBackup() {
-        const data = {
-            app: 'Место Силы',
-            exportedAt: new Date().toISOString(),
-            manifest,
-            entries,
-            morningDoneMap
-        };
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Mesto_Sily_${getDateISO(0)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('Файл резервной копии сохранен', '📦');
-    }
-
-    function importJsonBackup(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const parsed = JSON.parse(e.target.result);
-                if (Array.isArray(parsed.entries)) {
-                    entries = parsed.entries;
-                    localStorage.setItem(KEY_ENTRIES, JSON.stringify(entries));
-                }
-                if (parsed.manifest) {
-                    manifest = parsed.manifest;
-                    localStorage.setItem(KEY_MANIFEST, JSON.stringify(manifest));
-                }
-                if (parsed.morningDoneMap) {
-                    morningDoneMap = parsed.morningDoneMap;
-                    localStorage.setItem(KEY_MORNING_DONE, JSON.stringify(morningDoneMap));
-                }
-                init();
-                showToast('Данные успешно восстановлены из файла', '✅');
-            } catch (err) {
-                showToast('Не удалось прочитать файл копии', '⚠️');
-            }
-        };
-        reader.readAsText(file);
-        event.target.value = '';
-    }
-
-    function confirmClearDemoData() {
-        openConfirmModal(
-            'Начать с чистого листа?',
-            'Все текущие записи в архиве будут удалены. Твоя личная Декларация и Целевой Слайд сохранятся.',
-            () => {
-                entries = [];
-                morningDoneMap = {};
-                localStorage.setItem(KEY_ENTRIES, JSON.stringify(entries));
-                localStorage.setItem(KEY_MORNING_DONE, JSON.stringify(morningDoneMap));
-                ['ev-win-1', 'ev-win-2', 'ev-win-3', 'ev-english-note', 'ev-gratitude-have', 'ev-gratitude-not', 'ev-proof', 'ev-growth-lesson', 'ev-growth-release', 'ev-tomorrow-focus'].forEach(id => {
-                    document.getElementById(id).value = '';
-                });
-                document.getElementById('ev-english-toggle').checked = false;
-                [1, 2, 3].forEach(updateWinDot);
-                updateStats();
-                updateMorningCompleteButton();
-                renderArchive();
-                showToast('Дневник очищен. Готов к твоим реальным победам!', '🌱');
-            }
-        );
-    }
-
-    // ==================== УТИЛИТЫ (TOAST, MODAL, ESCAPE) ====================
-    function showToast(text, icon = '✨') {
-        const toast = document.getElementById('toast');
-        document.getElementById('toast-text').textContent = text;
-        document.getElementById('toast-icon').textContent = icon;
-        toast.classList.remove('opacity-0', '-translate-y-2');
-        toast.classList.add('opacity-100', 'translate-y-0');
-        clearTimeout(window._tTimer);
-        window._tTimer = setTimeout(() => {
-            toast.classList.add('opacity-0', '-translate-y-2');
-            toast.classList.remove('opacity-100', 'translate-y-0');
-        }, 3000);
-    }
-
-    function openConfirmModal(title, desc, action) {
-        document.getElementById('modal-title').textContent = title;
-        document.getElementById('modal-desc').textContent = desc;
-        pendingConfirm = action;
-        document.getElementById('confirm-modal').classList.remove('hidden');
-    }
-
-    function closeConfirmModal() {
-        document.getElementById('confirm-modal').classList.add('hidden');
-        pendingConfirm = null;
-    }
-
-    document.getElementById('modal-confirm-btn').addEventListener('click', () => {
-        if (pendingConfirm) pendingConfirm();
-        closeConfirmModal();
+    const nextF = document.getElementById('nextFocusInput').value.trim();
+    const entry = {
+      id: 'entry-' + getTodayKey(),
+      date: getTodayKey(),
+      wins: wins,
+      engDone: document.getElementById('engDone').checked,
+      engNote: document.getElementById('engNote').value.trim(),
+      gratHave: document.getElementById('gratHave').value.trim(),
+      gratNotYet: document.getElementById('gratNotYet').value.trim(),
+      faith: Number(document.getElementById('faithRange').value),
+      ease: Number(document.getElementById('easeRange').value),
+      align: currentAlign,
+      proof: document.getElementById('proofText').value.trim(),
+      growthLesson: document.getElementById('growthLesson').value.trim(),
+      growthRelease: document.getElementById('growthRelease').value.trim(),
+      nextFocus: nextF
+    };
+
+    const idx = state.entries.findIndex(e => e.date === getTodayKey());
+    if (idx >= 0) state.entries[idx] = entry;
+    else state.entries.unshift(entry);
+
+    if (nextF) state.nextFocus = nextF;
+    saveState(state);
+    renderAll();
+    showToast('Итоги дня сохранены!');
+  }
+
+  function renderArchive() {
+    const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+    const list = document.getElementById('archiveList');
+    const filtered = state.entries.filter(e => {
+      if (!q) return true;
+      const blob = [e.date, ...(e.wins||[]), e.gratHave, e.gratNotYet, e.proof, e.engNote].join(' ').toLowerCase();
+      return blob.includes(q);
     });
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>"']/g, m => ({
-            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-        }[m]));
+    if (!filtered.length) {
+      list.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);">Пока нет записей по этому запросу</div>';
+      return;
     }
 
-    window.onload = init;
+    list.innerHTML = filtered.map(e => `
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <strong style="font-size:14px;">📅 ${e.date}</strong>
+          <div>
+            ${e.engDone ? '<span class="pill" style="background:var(--green-soft);color:var(--green);">🇬🇧 English</span>' : ''}
+            <span class="pill">Вера ${e.faith || 8}/10</span>
+            <span class="pill">Легкость ${e.ease || 8}/10</span>
+          </div>
+        </div>
+        <div style="font-size:14px;margin-bottom:8px;">
+          ${(e.wins||[]).map((w, i) => `<div>🏆 <strong>${i+1}.</strong> ${escapeHtml(w)}</div>`).join('')}
+        </div>
+        ${e.proof ? `<div style="font-size:13px;color:#4B4239;background:var(--bg);padding:8px 10px;border-radius:10px;">🧠 ${escapeHtml(e.proof)}</div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  function showRandomWin() {
+    const allWins = [];
+    state.entries.forEach(e => (e.wins||[]).forEach(w => allWins.push({ date: e.date, text: w })));
+    const box = document.getElementById('randomWinBox');
+    if (!allWins.length) {
+      box.style.display = 'block';
+      box.textContent = 'Запиши свою первую победу вечером — и она появится здесь!';
+      return;
+    }
+    const pick = allWins[Math.floor(Math.random() * allWins.length)];
+    box.style.display = 'block';
+    box.innerHTML = `<div style="font-size:11px;color:#D89A5B;margin-bottom:4px;">ФАКТ ИЗ ТВОЕГО АРХИВА (${pick.date})</div><strong>🏆 ${escapeHtml(pick.text)}</strong>`;
+  }
+
+  function openSlideModal() {
+    nextFlashInModal();
+    document.getElementById('slideModal').classList.add('open');
+  }
+  function closeSlideModal() {
+    document.getElementById('slideModal').classList.remove('open');
+  }
+  function nextFlashInModal() {
+    const fl = state.flashes[Math.floor(Math.random() * state.flashes.length)];
+    document.getElementById('modalFlashText').textContent = '«' + fl + '»';
+    const allWins = [];
+    state.entries.forEach(e => (e.wins||[]).forEach(w => allWins.push(w)));
+    const w = allWins.length ? allWins[Math.floor(Math.random() * allWins.length)] : 'Ты уже начал менять свой сценарий и действовать осознанно';
+    document.getElementById('modalWinText').textContent = 'Твой реальный факт: ' + w;
+  }
+
+  function saveManifest() {
+    const d = document.getElementById('editDecl').value.trim();
+    const s = document.getElementById('editSlide').value.trim();
+    const f = document.getElementById('editFlashes').value.split('\n').map(x => x.trim()).filter(Boolean);
+    if (d) state.declaration = d;
+    if (s) state.slide = s;
+    if (f.length) state.flashes = f;
+    saveState(state);
+    renderAll();
+    showToast('Манифест обновлен!');
+  }
+
+  function exportBackup() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mesto-sily-backup-' + getTodayKey() + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Файл бэкапа сформирован');
+  }
+
+  function importBackup(ev) {
+    const file = ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        if (parsed && Array.isArray(parsed.entries)) {
+          state = parsed;
+          saveState(state);
+          renderAll();
+          showToast('Дневник восстановлен!');
+        }
+      } catch (err) { showToast('Ошибка чтения файла'); }
+    };
+    reader.readAsText(file);
+  }
+
+  function clearDemoData() {
+    state.entries = [];
+    state.morningCompletedDate = '';
+    saveState(state);
+    renderAll();
+    showToast('Демо-данные очищены. Чистый старт!');
+  }
+
+  // АУДИО-ДВИЖОК (Web Audio API для iOS Safari)
+  let soundMode = 'ambient';
+  let timerSec = 60;
+  let timerId = null;
+  let audioCtx = null;
+  let activeNodes = [];
+
+  function setSoundMode(m) {
+    soundMode = m;
+    ['ambient', 'ocean', 'mute'].forEach(k => {
+      document.getElementById('snd-' + k).classList.toggle('active', k === m);
+    });
+    if (timerId) {
+      stopAudio();
+      startAudio();
+    }
+  }
+
+  function startAudio() {
+    if (soundMode === 'mute') return;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!audioCtx) audioCtx = new AC();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const master = audioCtx.createGain();
+      master.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      master.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 2.0);
+      master.connect(audioCtx.destination);
+      activeNodes.push(master);
+
+      if (soundMode === 'ambient') {
+        const freqs = [144, 216, 288, 360]; // 432 Гц гармоники
+        freqs.forEach((f, idx) => {
+          const osc = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+          osc.frequency.value = f;
+          g.gain.value = 0.25 / (idx + 1);
+          osc.connect(g);
+          g.connect(master);
+          osc.start();
+          activeNodes.push(osc, g);
+        });
+      } else if (soundMode === 'ocean') {
+        const bufSize = audioCtx.sampleRate * 2;
+        const buf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+        const data = buf.getChannelData(0);
+        let lastOut = 0;
+        for (let i = 0; i < bufSize; i++) {
+          const white = Math.random() * 2 - 1;
+          data[i] = (lastOut + (0.02 * white)) / 1.02;
+          lastOut = data[i];
+          data[i] *= 3.5;
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buf;
+        noise.loop = true;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 380;
+        noise.connect(filter);
+        filter.connect(master);
+        noise.start();
+        activeNodes.push(noise, filter);
+      }
+    } catch (e) {}
+  }
+
+  function stopAudio() {
+    activeNodes.forEach(n => {
+      try { if (n.stop) n.stop(); n.disconnect(); } catch (e) {}
+    });
+    activeNodes = [];
+  }
+
+  function playBowlChime() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!audioCtx) audioCtx = new AC();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(528, audioCtx.currentTime);
+      g.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.5);
+      osc.connect(g);
+      g.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 3.6);
+    } catch (e) {}
+  }
+
+  function updateTimerUI() {
+    const m = String(Math.floor(timerSec / 60)).padStart(2, '0');
+    const s = String(timerSec % 60).padStart(2, '0');
+    document.getElementById('timerDisplay').textContent = m + ':' + s;
+    document.getElementById('timerProg').style.width = ((timerSec / 60) * 100) + '%';
+  }
+
+  function toggleTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+      stopAudio();
+      document.getElementById('timerStartBtn').textContent = '▶ Продолжить';
+      return;
+    }
+    if (timerSec <= 0) timerSec = 60;
+    startAudio();
+    document.getElementById('timerStartBtn').textContent = '⏸ Пауза';
+    timerId = setInterval(() => {
+      timerSec--;
+      updateTimerUI();
+      if (timerSec <= 0) {
+        clearInterval(timerId);
+        timerId = null;
+        stopAudio();
+        playBowlChime();
+        document.getElementById('timerStartBtn').textContent = '▶ Запустить 60 сек';
+        showToast('Визуализация завершена ✨');
+      }
+    }, 1000);
+  }
+
+  function resetTimer() {
+    if (timerId) { clearInterval(timerId); timerId = null; }
+    stopAudio();
+    timerSec = 60;
+    updateTimerUI();
+    document.getElementById('timerStartBtn').textContent = '▶ Запустить 60 сек';
+  }
+
+  generatePngIcon();
+  renderAll();
 </script>
 </body>
 </html>
